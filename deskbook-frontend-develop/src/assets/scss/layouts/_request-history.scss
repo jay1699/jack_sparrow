@@ -1,0 +1,29 @@
+.request-accepted {
+  color: green;
+}
+
+.request-rejected {
+  color: red;
+}
+
+.requested-data {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 50px;
+}
+
+.request-filter {
+  .ng-select-container {
+    background-color: #f3f3f5;
+    border: 0;
+  }
+}
+.request-filter {
+  .ng-select-container {
+    background-color: #f3f3f5 !important;
+  }
+  .ng-dropdown-panel {
+    border: 0;
+  }
+}

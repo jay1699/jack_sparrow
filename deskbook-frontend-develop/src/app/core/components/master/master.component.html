@@ -1,0 +1,22 @@
+<section class="d-flex h-100 overflow-hidden" [ngClass]="isSuperAdmin ? '' : 'flex-column'">
+  <!-- Deskbook header -->
+  <desk-book-header *ngIf="!isSuperAdmin"></desk-book-header>
+
+  <!-- Deskbook sidebar -->
+  <desk-book-sidebar *ngIf="isSuperAdmin"></desk-book-sidebar>
+
+  <section class="d-flex flex-column flex-grow-1 overflow-hidden">
+    <!-- admin header -->
+    <desk-book-admin-header *ngIf="isSuperAdmin" class="position-md-relative"></desk-book-admin-header>
+
+    <!-- main body -->
+    <main class="h-100 overflow-hidden ">
+      <router-outlet></router-outlet>
+    </main>
+    <!-- <desk-book-footer
+      *ngIf="isSuperAdmin"
+      (showAddButtonEvent)="showAddButton($event)"
+    ></desk-book-footer> -->
+  </section>
+</section>
+<!-- <desk-book-userprofile></desk-book-userprofile> -->

@@ -1,0 +1,67 @@
+// font family
+$font-family-base: 'Inter', sans-serif;
+$font-family-baloo: 'Baloo Bhaina 2', cursive;
+
+// forgot-password variables
+$btn-color: $white;
+$input-font-family: $font-family-base;
+$title-font-size: 28px;
+$font-size-md: 22px;
+$font-size-sm: 16px;
+$font-size-xs: 14px;
+$font-s-lg: 1.1rem;
+$font-size-xs: 14px;
+$font-size-md: 24px;
+$bs-btn-hover-color: $white;
+
+$font-size-sm: 0.9rem;
+$margin-bottom-base: 20px;
+$headings-font-weight: 700;
+$h3-font-size: 28px;
+$offcanvas-horizontal-width: 500px;
+$offcanvas-transition-duration: 1s;
+$offcanvas-padding-y: 0;
+$offcanvas-padding-x: 0;
+$font-weight-600: 600;
+
+// Sign-In
+$sign-in-h3-font-weight: $headings-font-weight;
+$sign-in-h3-font-size: $h3-font-size;
+
+//  book seat variables
+$list-font-weight: 500;
+$font-size-lg: 1.125rem;
+$font-size-subtitle: 22px;
+$table-font-size: 20px;
+$btn-border-color: none;
+$font-size-table-head: 0.875rem;
+
+// start : popover message
+// start : popover variables override
+$enable-shadows: true;
+$popover-border-color: 0;
+$popover-max-width: "null";
+$popover-body-padding-y: 0;
+$popover-body-padding-x: 0;
+$modal-header-border-color: 0;
+$body-font-size: 18px;
+$body-font-weight: 600;
+
+// end : popover message
+
+// start:popup message
+$modal-header-padding: 1.825rem 1.5rem;
+// $modal-width:300px;
+// end : popup message
+$font-size-table-head: 0.875rem;
+
+// start : take Action popup 
+$h5-font-size: 20px;
+$headings-font-weight: 600;
+$btn-border-radius: 4px;
+$btn-padding-x: 24px;
+$btn-padding-y: 8px;
+// end : take Action popup 
+
+//booking history variable
+$font-size-table-head: 0.875rem;

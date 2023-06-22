@@ -1,0 +1,68 @@
+.manage-btn {
+  color: $white;
+  &:hover {
+    color: $white;
+  }
+}
+// logout button of sidebar
+.sidebar {
+  .logout-btn {
+    background-color: transparent;
+    border: 0;
+    width: 100%;
+    text-align: start;
+  }
+}
+// popup message for reason of bookseat
+.modal-header .btn-close {
+  border: 0;
+  background-color: transparent;
+}
+
+//header logout button
+.btn-logout {
+  background-color: $dark-yellow;
+  color: $white;
+  &:hover {
+    border: 0.5px solid #f38d1f;
+    background-color: #f38d1f;
+    color: $white;
+  }
+}
+// starts : booking-history employee modal buttons
+.confirmation-btn-no {
+  &.btn-outline-secondary {
+    color: $nav-link-color;
+    width: 100px;
+    height: 40px;
+    &:hover {
+      background-color: #6c757d;
+      border: 0;
+      color: $white;
+    }
+  }
+}
+.confirmation-btn-yes {
+  &.btn-outline-secondary {
+    color: $white;
+    width: 100px;
+    height: 40px;
+    border: 0;
+    background-color: $light-blue-color;
+    &:hover {
+      background-color: $light-blue-color;
+      border: 0;
+      color: $white;
+    }
+  }
+}
+// ends : booking-history employee modal buttons
+
+// booking-history cancel button in table
+.cancel-booking-btn {
+  background-color: $bg-grey;
+  border: 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}

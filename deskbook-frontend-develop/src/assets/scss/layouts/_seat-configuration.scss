@@ -1,0 +1,26 @@
+.add-btn {
+  width: 40px;
+  height: 40px;
+}
+
+// hover
+.add-btn:hover {
+  box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.seat-configuration-content {
+  background-color: $admin-background-color;
+}
+
+.seat-config-table {
+  background-color: $white;
+}
+
+.select-city-message {
+  color: $text-primary;
+}
+
+.table-index {
+  height: 80px;
+}

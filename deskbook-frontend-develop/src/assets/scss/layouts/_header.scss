@@ -1,0 +1,121 @@
+.header-nav {
+  border-bottom: 1px solid $nav-border;
+  padding: 0;
+
+  .header {
+    .navbar-brand {
+      font-family: $font-family-baloo;
+      cursor: pointer;
+      font-size: 30px;
+      margin-bottom: 0;
+      margin-top: 0;
+      font-weight: 700;
+      color: $text-primary;
+    }
+    .logo-img {
+      height: 40px;
+      width: 50px;
+      cursor: pointer;
+    }
+  }
+  .nav-item {
+    color: $text-primary;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    &.li-book-history {
+      padding: 0 60px;
+    }
+
+    .nav-link {
+      padding: 26px 0;
+      &.active {
+        border-bottom: 2px solid $light-blue-color;
+      }
+    }
+  }
+}
+
+.custom {
+  .modal-content {
+    width: 350px;
+  }
+}
+
+.user-action {
+  cursor: pointer;
+
+  .nav-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #e2e2e9;
+
+    .btnuser,
+    .btnsearch {
+      background-color: #e2e2e9;
+    }
+
+    .search-icon {
+      height: 18px;
+      width: 18px;
+    }
+
+    .bell-icon {
+      height: 20px;
+      width: 18px;
+    }
+
+    .user-icon {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.99px) {
+  .header {
+    width: 100%;
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.99px) {
+  .header {
+    width: 100%;
+    max-width: 920px;
+  }
+
+  .header-nav {
+    width: 100%;
+    max-width: 380px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399.99px) {
+  .header {
+    width: 100%;
+    max-width: 1080px;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1599.99px) {
+  .header {
+    width: 100%;
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1600px) and (max-width: 1799.99px) {
+  .header {
+    width: 100%;
+    max-width: 1440px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .header {
+    width: 100%;
+    max-width: 1700px;
+  }
+}

@@ -1,0 +1,81 @@
+<!-- START: book-seat header  -->
+<div
+  class="container-fluid d-flex justify-content-between flex-column flex-md-row py-4 px-0"
+>
+  <h2 class="title">Book Seat</h2>
+  <div class="flex-wrap d-flex justify-content-between flex-md-row gap-2">
+    <div class="d-flex align-items-center">
+      <!-- START: book-seat-header list-->
+      <!-- START:date -->
+      <label class="header-list me-2">Date:</label>
+      <form class="row row-cols-sm-auto">
+        <div class="col-12">
+          <div class="input-group">
+            <input
+              class="form-control header-list header-list-option"
+              placeholder="mm/dd/yyyy"
+              [markDisabled]="isDisabled"
+              name="dp"
+              [formControl]="dateControl"
+              ngbDatepicker
+              #d="ngbDatepicker"
+              #date
+              [readonly]="true"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+              (ngModelChange)="onDateChange()"
+            />
+            <button
+              class="btn bi bi-calendar3 border-0 date-btn"
+              (click)="d.toggle()"
+              type="button"
+            ></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- START:city -->
+    <div class="d-flex align-items-center">
+      <label class="header-list me-2">City:</label>
+      <ng-select
+        [items]="cities"
+        [formControl]="city"
+        class="header-list-option placeholder"
+        placeholder="Select City"
+        [formControl]="cityControl"
+        [clearable]="false"
+        [searchable]="false"
+        [formControl]="cityControl"
+        bindLabel="name"
+        bindValue="id"
+        [readonly]="isDisabledCity"
+        (change)="onCitySelect($event)"
+        [readonly]="isDisabledCity"
+      >
+      </ng-select>
+    </div>
+    <!-- END:city -->
+    <!-- START:floor -->
+    <div class="d-flex align-items-center">
+      <label class="header-list me-2">Floor:</label>
+      <ng-select
+        [items]="floors"
+        [formControl]="floor"
+        [formControl]="floorControl"
+        bindLabel="name"
+        bindValue="id"
+        [formControl]="floorControl"
+        placeholder="Select Floor"
+        [clearable]="false"
+        [searchable]="false"
+        [readonly]="isDisabledFloor"
+        class="header-list-option placeholder"
+        (change)="onChangeFloor($event)"
+      >
+      </ng-select>
+    </div>
+    <!-- END:floor -->
+  </div>
+  <!-- END: book-seat-header list-->
+</div>
+<!-- END: book-seat header  -->

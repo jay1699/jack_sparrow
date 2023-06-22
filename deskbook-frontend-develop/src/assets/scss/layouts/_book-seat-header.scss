@@ -1,0 +1,84 @@
+@mixin margin($top, $right, $bottom, $left) {
+  margin-top: $top;
+  margin-right: $right;
+  margin-bottom: $bottom;
+  margin-left: $left;
+}
+
+@mixin padding($top, $right, $bottom, $left) {
+  padding-top: $top;
+  padding-right: $right;
+  padding-bottom: $bottom;
+  padding-left: $left;
+}
+
+.title {
+  font-family: $font-family-base;
+  font-weight: $font-weight-bold;
+  font-size: $title-font-size;
+  color: $text-primary;
+}
+
+.header-list {
+  font-family: $font-family-base;
+  font-weight: $list-font-weight; //500
+  font-size: $font-s-lg; //18px
+  color: $text-primary;
+}
+
+.header-list-option {
+  border: none;
+  height: 46px;
+  width: 157px;
+  border-radius: 4px;
+  background-color: $bg-grey;
+  @include padding(4px, 18px, 4px, 10px);
+  outline: 0;
+
+  &.placeholder {
+    color: $text-muted;
+    font-weight: $font-weight-semibold; //600
+  }
+}
+
+.input-group > .form-control {
+  width: 138px;
+}
+
+.date-btn {
+  background-color: $bg-grey;
+
+  &:hover {
+    background-color: $bg-grey;
+    color: #6c757d;
+  }
+}
+
+//ng select
+.select-option {
+  .ng-select .ng-select-container {
+    border: 0;
+    background-color: $bg-grey;
+  }
+
+  .ng-select.ng-select-opened > .ng-select-container {
+    background-color: $bg-grey;
+    border: 0;
+  }
+
+  .ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+    box-shadow: none;
+  }
+
+  .ng-select.ng-select-disabled > .ng-select-container {
+    background-color: $ng-select-disable-color;
+  }
+}
+
+//floor and city
+@media (max-width: 939px) {
+  .header-selection {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

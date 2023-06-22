@@ -1,0 +1,195 @@
+.popover {
+  min-width: 500px;
+}
+// arrow border 0 of popover message
+.bs-popover-bottom > .popover-arrow::before {
+  border-width: 0;
+}
+
+.bs-popover-end > .popover-arrow::before {
+  border-width: 0;
+}
+
+.bs-popover-start > .popover-arrow::before {
+  border-width: 0;
+}
+
+.bs-popover-top > .popover-arrow::before {
+  border-width: 0;
+}
+
+// poperover arrow goes to chair-icon
+.popover {
+  &.bs-popover-bottom {
+    margin-top: -15px !important;
+  }
+
+  &.bs-popover-start {
+    margin-right: -15px !important;
+  }
+
+  &.bs-popover-top {
+    margin-bottom: -10px !important;
+  }
+
+  &.bs-popover-end {
+    margin-left: -15px !important;
+  }
+}
+
+.btn-seat {
+  background: none;
+  border: 0;
+
+  &:hover {
+    background-color: #d4e6fd;
+  }
+}
+
+.popover-message {
+  padding: 0;
+  margin: 0;
+
+  .reserved-seat {
+    background-color: #fdeceb;
+    padding: 2px 10px;
+    border-radius: 30px;
+    color: #ea4234;
+    border: 1px solid #ea4234;
+  }
+
+  .user-details {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 0;
+  }
+
+  .user-title {
+    color: #868a8f;
+  }
+
+  .popover-list {
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .user-email {
+    color: $light-blue-color;
+  }
+
+  .available-seat {
+    background-color: #ebf8ec;
+    padding: 2px 10px;
+    border-radius: 30px;
+    color: #58a65f;
+    border: 1px solid #58a65f;
+  }
+}
+
+.book-seat-details {
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.booked-seat {
+  background: #2880fc1a;
+  padding: 2px 10px;
+  border-radius: 30px;
+  color: $light-blue-color;
+  border: 1px solid $light-blue-color;
+}
+
+.user-seat-reserved,
+.user-seat-booked,
+.user-seat-available {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.request-btn,
+.unasign-btn {
+  background-color: $light-blue-color;
+  color: $white;
+  font-size: 16px;
+  font-weight: 600;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.booked-popover {
+  background-color: #f7f8fa;
+  border-radius: 5px;
+}
+
+.note-available-seat {
+  width: 330px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #031837;
+}
+
+.unasign-btn {
+  padding-left: 90px;
+  padding-right: 90px;
+}
+
+// start : registered user
+.registered-users-component {
+  .popover {
+    min-width: auto;
+  }
+}
+
+.view-user-status {
+  .fa-circle-user {
+    font-size: 23px;
+  }
+
+  .admin-option {
+    font-weight: 600;
+    color: #031837;
+
+    &:hover {
+      cursor: pointer;
+      color: #2880fc;
+    }
+  }
+}
+
+// end : registered user
+
+//admin popover
+.admin-popover {
+  font-size: $font-size-subtitle; //22px
+  color: $text-primary; //#031837
+  font-weight: $font-weight-bold; //700
+}
+
+.admin-popover-content {
+  font-weight: $list-font-weight; //500
+  font-size: $font-size-base; //16px
+  color: $text-primary; //#031837
+}
+
+.custom-popover {
+  .popover {
+    min-width: 350px;
+  }
+}
+// unavailable button
+.btn-warning {
+  background-color: $dark-yellow;
+}
+
+.btn-warning:hover {
+  background-color: $dark-yellow;
+}
+
+.view-btn {
+  background-color: $white;
+  border: 0;
+}

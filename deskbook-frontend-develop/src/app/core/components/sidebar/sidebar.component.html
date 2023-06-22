@@ -1,0 +1,76 @@
+<input type="checkbox" id="toggle" />
+<!-- start : sidebar -->
+<aside class="sidebar d-flex overflow-hidden flex-column">
+  <!-- start : deskbook logo section -->
+  <div class="logo-deskbook clearfix text-center py-3">
+    <figure class="header-icon mb-0">
+      <img src="assets/images/db-icon.png" class="img-fluid" alt="db-icon" />
+    </figure>
+    <h3 class="deskbook-heading mb-0">DeskBook</h3>
+  </div>
+  <!-- end : deskbook logo section -->
+  <!-- start : list of sidebar -->
+  <ul class="sidebar-list ps-0 mb-0 mt-2">
+    <li class="nav-item">
+      <a
+        class="dashboard-link nav-link text-decoration-none d-flex align-items-center"
+        routerLinkActive="active"
+        routerLink="dashboard"
+        title="Dashboard"
+      >
+        <span class="icon icon-dashboard"></span>
+        <span class="nav-text sidebar-fist-text">Dashboard</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        routerLink="seat-configuration"
+        routerLinkActive="active"
+        class="nav-link text-decoration-none d-flex p-3"
+        title="Seat Configuration"
+      >
+        <span class="icon icon-seat-icon ms-1"></span>
+        <span class="nav-text ms-3" routerLink="seat-configuration"
+          >Seat Configuration</span
+        >
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        routerLink="booking-history"
+        routerLinkActive="active"
+        class="nav-link text-decoration-none d-flex p-3"
+        title="Booking History"
+        routerLink="booking-history"
+      >
+        <span class="icon icon-booking-history ms-1"></span>
+        <span class="nav-text ms-3">Booking History</span></a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        routerLink="request-history"
+        routerLinkActive="active"
+        class="nav-link text-decoration-none ps-3 d-flex p-3"
+        title="Request History"
+        routerLink="request-history"
+      >
+        <span class="icon icon-request-history ms-1"></span>
+        <span class="nav-text ms-3">Request History</span></a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        routerLink="registered-users"
+        routerLinkActive="active"
+        class="nav-link text-decoration-none ps-3 d-flex p-3"
+        title="Registered Users"
+      >
+        <span class="icon icon-registered ms-1"></span>
+        <span class="nav-text ms-3">Registered Users</span></a
+      >
+    </li>
+  </ul>
+  <!-- start : list of sidebar -->
+</aside>
+<!-- end : sidebar -->

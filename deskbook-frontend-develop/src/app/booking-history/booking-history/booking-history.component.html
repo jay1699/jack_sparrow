@@ -1,0 +1,182 @@
+<section
+  class="admin-history d-flex flex-column overflow-hidden container-fluid"
+  [ngClass]="[
+    isSuperAdmin ? 'employee-history-content' : 'admin-history-color'
+  ]"
+>
+  <div
+    class="content-title mb-3 d-flex justify-content-between align-items-center"
+  >
+    <h3>Booking History</h3>
+    <div class="d-flex">
+      <div class="input-group search-box me-3" *ngIf="!isSuperAdmin">
+        <figure class="searchbar mb-0" for="search-name">
+          <img src="assets/images/search.png" alt="search-icon" />
+        </figure>
+        <input
+          type="text"
+          class="form-control search-item"
+          placeholder="Search by name..."
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          [formControl]="searchControl"
+          (keyup)="searchData()"
+          id="search-name"
+          deskBookRestrictSpecialCharacters
+        />
+      </div>
+      <div class="ng-select-options select-option">
+        <ng-select
+          [items]="status"
+          bindLabel="name"
+          bindValue="id"
+          [formControl]="dropDown"
+          [clearable]="false"
+          [searchable]="false"
+          placeholder="All Booking"
+          (change)="dropDownChange()"
+        >
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div
+    class="table-container d-flex flex-column overflow-auto flex-grow-1 bg-white"
+  >
+    <table class="table-content" aria-label="booking-history-table">
+      <thead>
+        <tr class="content-table-head">
+          <th scope="col">NO.</th>
+          <th scope="col">NAME</th>
+          <th scope="col">REQUEST DATE</th>
+          <th *ngIf="!isSuperAdmin" scope="col">ALLOTED DATE</th>
+          <th *ngIf="isSuperAdmin" scope="col">BOOKED DATE</th>
+          <th scope="col">EMAIL</th>
+          <th class="text-center" scope="col">FLOOR NO.</th>
+          <th class="text-center" scope="col">DESK NO.</th>
+          <th class="pe-4 text-center" scope="col">DURATION</th>
+          <th class="pe-4 text-center" *ngIf="isSuperAdmin" scope="col">
+            STATUS
+          </th>
+          <th class="text-center" *ngIf="isSuperAdmin" scope="col">ACTION</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!isSuperAdmin">
+        <tr
+          class="content-table-data"
+          *ngFor="let data of bookingHistoryData; let i = index"
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.requestDate }}</td>
+          <td>{{ data.allottedDate }}</td>
+          <td class="email" title="{{ data.email }}">
+            {{ data.email }}
+          </td>
+          <td class="text-center">{{ data.floorNo }}</td>
+          <td class="text-center">{{ data.deskNo }}</td>
+          <td class="text-center">One Day</td>
+          <td class="text-center" *ngIf="isSuperAdmin">Pending</td>
+          <td class="text-center"></td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="isSuperAdmin">
+        <ng-container *ngFor="let data of bookingHistoryData; let i = index">
+          <tr class="content-table-data">
+            <td>{{ i + 1 }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.requestedDate }}</td>
+            <td>{{ data.bookingDate }}</td>
+            <td class="email" title="{{ data.email }}">
+              {{ data.email }}
+            </td>
+            <td class="text-center">{{ data.floor }}</td>
+            <td class="text-center">{{ data.deskNumber }}</td>
+            <td class="text-center">One Day</td>
+            <td class="text-center" *ngIf="data.requestStatus === 1">
+              Pending
+            </td>
+            <td class="text-center" *ngIf="data.requestStatus === 2">
+              Accepted
+            </td>
+            <td class="text-center" *ngIf="data.requestStatus === 3">
+              Rejected
+            </td>
+            <td class="text-center" *ngIf="data.requestStatus === 4">Cancel</td>
+            <td *ngIf="isSuperAdmin && isDisabled" class="text-center">
+              <button
+                class="cancel-booking-btn"
+                (click)="
+                  openVerticallyCentered(cancelConfirmation, data.requestId)
+                "
+                [disabled]="isDisabled"
+              >
+                <img src="../../../assets/images/cancel-btn.png" alt="" />
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <div
+      *ngIf="showNoRecord"
+      class="d-flex justify-content-center align-items-center h-100"
+    >
+      <h3>No Record Found</h3>
+    </div>
+  </div>
+</section>
+<ng-template #cancelConfirmation let-modal>
+  <div class="modal-header popup-container p-3">
+    <h5>Cancel Confirmation</h5>
+    <button
+      type="button"
+      class="btn-close cross-btn pb-4"
+      aria-label="Close"
+      (click)="modal.close('Close click')"
+    >
+      <img src="assets/images/close-icon.png" alt="cross-icon" />
+    </button>
+  </div>
+  <div class="d-flex justify-content-center">
+    <p class="cancel-confirmation-message">
+      Are you sure you want to cancel your booking?
+    </p>
+  </div>
+  <div class="modal-footer justify-content-center">
+    <button type="button" class="btn btn-outline-secondary confirmation-btn-no">
+      No
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary confirmation-btn-yes"
+      (click)="cancelUserRequest()"
+    >
+      Yes
+    </button>
+  </div>
+</ng-template>
+<!-- popup for cancel button -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>One fine body&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

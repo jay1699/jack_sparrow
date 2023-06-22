@@ -1,0 +1,898 @@
+<div class="overlay">
+  <div class="overlay-content d-flex flex-column">
+    <!-- Userprofile form:starts -->
+    <div class="d-flex flex-column overflow-hidden">
+      <!-- Page header starts here -->
+      <div class="form-header d-flex flex-column">
+        <div class="user-profile-heading d-flex justify-content-between p-4">
+          <h4 class="form-header-title"> {{ profileTitle? 'User Profile':(isEditable? 'My Profile':'Edit Profile') }}</h4>
+          <button
+            type="button"
+            class="btn-close border-0 bg-white"
+            aria-label="Close"
+            (click)="formCloseConfirmation(formClosingConfirmation)"
+            title="close"
+          >
+            <img src="./assets/images/close-icon.png" alt="Close Form" />
+          </button>
+        </div>
+      </div>
+      <!-- Page header ends here -->
+      <!-- Form starts here -->
+      <form
+        *ngIf="!isEditable"
+        [formGroup]="userProfileForm"
+        (ngSubmit)="updateUserData()"
+        class="userprofile-form d-flex flex-column flex-grow-1 overflow-hidden"
+      >
+        <div class="form-details flex-grow-1 overflow-auto">
+          <div>
+            <div class="d-flex align-items-center p-4 user-details">
+              <div class="uploadandeditimg">
+                <img
+                  [src]="defaultImageUrl"
+                  alt="Upload Img"
+                  class="uploading"
+                />
+
+                <label for="file-input">
+                  <img
+                    src="./assets/images/edit-img.png"
+                    alt="Edit Img"
+                    class="editimg"
+                  />
+                </label>
+                <input
+                  type="file"
+                  name=""
+                  id="file-input"
+                  (change)="
+                    uploadImage($event, invalidImageFormat, invalidImageSize)
+                  "
+                />
+              </div>
+              <div class="ps-4">
+                <!-- START:firstName -->
+                <input class="username border-0" formControlName="firstName" />
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="!userProfileForm.get('firstName')?.valid && userProfileForm.get('firstName')?.touched && userProfileForm.get('firstName')?.errors?.['pattern']"
+                >
+                  Please enter a valid First Name
+                </div>
+
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    submitted &&
+                    userProfileForm.get('firstName')?.invalid &&
+                    userProfileForm.get('firstName')?.untouched
+                  "
+                >
+                  <div
+                    *ngIf="userProfileForm.get('firstName')?.errors?.['pattern']"
+                  >
+                    Please enter a valid First Name
+                  </div>
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    !userProfileForm.get('firstName')?.valid &&
+                    userProfileForm.get('firstName')?.touched
+                  "
+                >
+                  <div
+                    *ngIf="!userProfileForm.get('firstName')?.errors?.['pattern'] && userProfileForm.get('firstName')?.errors?.['minlength']"
+                  >
+                    First name must be of 2 characters or more
+                  </div>
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    !userProfileForm.get('firstName')?.valid &&
+                    userProfileForm.get('firstName')?.touched
+                  "
+                >
+                  <div
+                    *ngIf="!userProfileForm.get('firstName')?.errors?.['pattern'] && userProfileForm.get('firstName')?.errors?.['maxlength']"
+                  >
+                    Your First name cannot exceed 100 characters
+                  </div>
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    submitted &&
+                    userProfileForm.get('firstName')?.invalid &&
+                    userProfileForm.get('firstName')?.untouched
+                  "
+                >
+                  <div
+                    *ngIf="userProfileForm.get('firstName')?.errors?.['required']"
+                  >
+                    Please enter your First Name
+                  </div>
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="userProfileForm.get('firstName')?.invalid && userProfileForm.get('firstName')?.touched && userProfileForm.get('firstName')?.errors?.['required']"
+                >
+                  Please enter your First Name
+                </div>
+                <!-- END:firstName -->
+                <!-- START:lastName -->
+                <input class="username border-0" formControlName="lastName" />
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="!userProfileForm.get('lastName')?.valid && userProfileForm.get('lastName')?.touched && userProfileForm.get('lastName')?.errors?.['pattern']"
+                >
+                  Please enter a valid Last Name
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    submitted &&
+                    userProfileForm.get('lastName')?.invalid &&
+                    userProfileForm.get('lastName')?.untouched
+                  "
+                >
+                  <div
+                    *ngIf="userProfileForm.get('lastName')?.errors?.['pattern']"
+                  >
+                    Please enter a valid Last Name
+                  </div>
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    !userProfileForm.get('lastName')?.valid &&
+                    userProfileForm.get('lastName')?.touched
+                  "
+                >
+                  <div
+                    *ngIf="!userProfileForm.get('lastName')?.errors?.['pattern'] && userProfileForm.get('lastName')?.errors?.['minlength']"
+                  >
+                    Last name must be of 2 characters or more
+                  </div>
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    !userProfileForm.get('lastName')?.valid &&
+                    userProfileForm.get('lastName')?.touched
+                  "
+                >
+                  <div
+                    *ngIf="!userProfileForm.get('lastName')?.errors?.['pattern'] && userProfileForm.get('lastName')?.errors?.['maxlength']"
+                  >
+                    Your Last name cannot exceed 100 characters
+                  </div>
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    submitted &&
+                    userProfileForm.get('lastName')?.invalid &&
+                    userProfileForm.get('lastName')?.untouched
+                  "
+                >
+                  <div
+                    *ngIf="userProfileForm.get('lastName')?.errors?.['required']"
+                  >
+                    Please enter your Last Name
+                  </div>
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="userProfileForm.get('lastName')?.invalid && userProfileForm.get('lastName')?.touched && userProfileForm.get('lastName')?.errors?.['required']"
+                >
+                  Please enter your Last Name
+                </div>
+                <!-- END:lastName -->
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="d-flex flex-column justify-content-between p-2 row g-3 form"
+          >
+            <h6 class="info-title">PERSONAL INFORMATION</h6>
+            <!-- Personal Information -->
+            <!-- START:EMAIL -->
+            <div class="col-12">
+              <label for="inputEmail" class="form-label field-label"
+                >Email <span class="mandatory-field">*</span></label
+              >
+
+              <input
+                type="email"
+                class="form-control email-input"
+                id="exampleInputEmail"
+                aria-describedby="emailHelp"
+                placeholder="Eg. gregory.williams@example.com "
+                value="{{ employeeData.emailId }}"
+                disabled
+              />
+            </div>
+            <!-- END:EMAIL -->
+            <!-- START:PHONE NO -->
+            <div class="col-12">
+              <label for="inputPhoneNo" class="form-label field-label"
+                >Phone No. <span class="mandatory-field">*</span></label
+              >
+              <input
+                type="text"
+                class="form-control phoneno-input"
+                id="inputPhoneNo"
+                placeholder="Enter Phone No."
+                maxlength="10"
+                formControlName="phoneNumber"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && userProfileForm.get('phoneNumber')?.invalid
+                }"
+                [ngClass]="{
+                  invalid:
+                    userProfileForm.get('phoneNumber')?.touched &&
+                    userProfileForm.get('phoneNumber')?.invalid
+                }"
+              />
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="!userProfileForm.get('phoneNumber')?.valid && userProfileForm.get('phoneNumber')?.touched && userProfileForm.get('phoneNumber')?.errors?.['pattern']"
+              >
+                Please enter a numeric value only
+              </div>
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="
+                  !userProfileForm.get('phoneNumber')?.valid &&
+                  userProfileForm.get('phoneNumber')?.touched
+                "
+              >
+                <div
+                  *ngIf="!userProfileForm.get('phoneNumber')?.errors?.['pattern'] && userProfileForm.get('phoneNumber')?.errors?.['minlength']"
+                >
+                  10-digit number is required
+                </div>
+              </div>
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="
+                  !userProfileForm.get('phoneNumber')?.valid &&
+                  userProfileForm.get('phoneNumber')?.touched
+                "
+              >
+                <div
+                  *ngIf="!userProfileForm.get('phoneNumber')?.errors?.['pattern'] && userProfileForm.get('phoneNumber')?.errors?.['maxlength']"
+                >
+                  10-digit number is required
+                </div>
+              </div>
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="userProfileForm.get('phoneNumber')?.invalid && userProfileForm.get('phoneNumber')?.touched && userProfileForm.get('phoneNumber')?.errors?.['required']"
+              >
+                Please enter phone no.
+              </div>
+
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="
+                  submitted &&
+                  userProfileForm.get('phoneNumber')?.invalid &&
+                  userProfileForm.get('phoneNumber')?.untouched
+                "
+              >
+                <div
+                  *ngIf="userProfileForm.get('phoneNumber')?.errors?.['required']"
+                >
+                  Please enter phone no.
+                </div>
+              </div>
+            </div>
+            <!-- END:PHONE NO -->
+
+            <!-- START:DESIGNATION -->
+            <div class="error-box col-12">
+              <label for="inputDesignation" class="form-label field-label"
+                >Designation <span class="mandatory-field">*</span></label
+              >
+              <ng-select
+                class="designation-input"
+                placeholder="Select Designation"
+                formControlName="designation"
+                [items]="designation"
+                bindLabel="name"
+                bindValue="id"
+                [clearable]="false"
+                [searchable]="false"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && userProfileForm.get('designation')?.invalid
+                }"
+                [ngClass]="{
+                  'is-invalid':
+                    userProfileForm.get('designation')?.touched &&
+                    userProfileForm.get('designation')?.invalid
+                }"
+              >
+              </ng-select>
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="
+                  userProfileForm.get('designation')?.invalid &&
+                  userProfileForm.get('designation')?.touched
+                "
+              >
+                Please select designation
+              </div>
+
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="
+                  submitted &&
+                  userProfileForm.get('designation')?.invalid &&
+                  userProfileForm.get('designation')?.untouched
+                "
+              >
+                <div
+                  *ngIf="userProfileForm.get('designation')?.errors?.['required']"
+                >
+                  Please select designation
+                </div>
+              </div>
+            </div>
+            <!-- END:DESIGNATION -->
+            <!-- Seat Information -->
+            <h6 class="info-title col-12">SEAT INFORMATION</h6>
+            <!-- START:MODE OF WORK -->
+            <div class="col-12">
+              <div class="popover-hybrid d-flex">
+                <label for="inputModeofWork" class="form-label field-label me-1"
+                  >Mode Of Work <span class="mandatory-field">*</span></label
+                >
+
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary tooltip border-0"
+                  placement="auto"
+                  [ngbPopover]="popContent"
+                  *ngIf="selectModeOfWork"
+                >
+                  <span class="bi bi-info-circle"> </span>
+                </button>
+              </div>
+              <ng-template #popContent>
+                <div class="hybrid-content">
+                  Multiple days can be selected.Max 4-days and Min 1-day
+                  selection will be allowed.
+                </div>
+              </ng-template>
+
+              <ng-select
+                class="modeofwork-input"
+                placeholder="Select Mode of Work"
+                formControlName="modeOfWork"
+                [items]="modeOfWork"
+                bindLabel="name"
+                bindValue="id"
+                [clearable]="false"
+                [searchable]="false"
+                (change)="onChangeModeOfWork($event)"
+                [ngClass]="{
+                  'is-invalid':
+                    submitted && userProfileForm.get('modeOfWork')?.invalid
+                }"
+              >
+              </ng-select>
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="userProfileForm.get('modeOfWork')?.invalid && userProfileForm.get('modeOfWork')?.touched && userProfileForm.get('modeOfWork')?.errors?.['required']"
+              >
+                Please select Mode of work
+              </div>
+              <div
+                class="text-danger validation-fonts"
+                *ngIf="
+                  submitted &&
+                  userProfileForm.get('modeOfWork')?.invalid &&
+                  userProfileForm.get('modeOfWork')?.untouched
+                "
+              >
+                <div
+                  *ngIf="userProfileForm.get('modeOfWork')?.errors?.['required']"
+                >
+                  Please select Mode of work
+                </div>
+              </div>
+            </div>
+
+            <!-- Start: Days -->
+            <div
+              class="d-flex justify-content-between pt-3"
+              *ngIf="selectModeOfWork"
+            >
+              <div *ngFor="let day of hybridDays">
+                <label class="day-label" for="{{ day.id }}">
+                  <input
+                    class="selectdays"
+                    type="checkbox"
+                    id="{{ day.id }}"
+                    (change)="getSelectedDaysValues($event)"
+                    #days
+                    value="{{ day.day }}"
+                    [checked]="day.selected"
+                  />
+                  <span class="day">{{
+                    day.day | uppercase | slice : 0 : 3
+                  }}</span>
+                </label>
+              </div>
+            </div>
+            <!-- End: Days -->
+            <div class="text-danger validation-fonts">
+              {{ maxDaysValidationMessage }}
+            </div>
+            <div class="text-danger validation-fonts">
+              {{ minDaysValidationMessage }}
+            </div>
+
+            <!-- END:MODE OF WORK -->
+            <!-- START:CITY AND FLOOR -->
+            <div class="row mb-3 mt-3 seatconfig-info ps-2">
+              <!-- START:CITY -->
+
+              <div class="error-box col-6 ps-0 pe-4">
+                <label for="inputCity" class="form-label field-label"
+                  >City <span class="mandatory-field">*</span></label
+                >
+                <ng-select
+                  class="city-input"
+                  placeholder="Select City"
+                  formControlName="city"
+                  [items]="city"
+                  bindLabel="name"
+                  bindValue="id"
+                  [clearable]="false"
+                  [searchable]="false"
+                  (change)="onChangeCity($event)"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && userProfileForm.get('city')?.invalid
+                  }"
+                >
+                </ng-select>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="userProfileForm.get('city')?.invalid && userProfileForm.get('city')?.touched && userProfileForm.get('city')?.errors?.['required']"
+                >
+                  Please select city
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    submitted &&
+                    userProfileForm.get('city')?.invalid &&
+                    userProfileForm.get('city')?.untouched
+                  "
+                >
+                  <div
+                    *ngIf="userProfileForm.get('city')?.errors?.['required']"
+                  >
+                    Please select city
+                  </div>
+                </div>
+              </div>
+              <!-- END:CITY -->
+              <!-- START:FLOOR -->
+              <div class="error-box col-6 pe-0 ps-3">
+                <label for="inputFloor" class="form-label field-label"
+                  >Floor<span class="mandatory-field">*</span></label
+                >
+                <ng-select
+                  class="floor-input"
+                  placeholder="Select Floor"
+                  formControlName="floor"
+                  [items]="floor"
+                  bindLabel="name"
+                  bindValue="id"
+                  [clearable]="false"
+                  [searchable]="false"
+                  (change)="onChangeFloor($event)"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && userProfileForm.get('floor')?.invalid
+                  }"
+                >
+                </ng-select>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="userProfileForm.get('floor')?.invalid && userProfileForm.get('floor')?.touched && userProfileForm.get('floor')?.errors?.['required']"
+                >
+                  Please select floor
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    submitted &&
+                    userProfileForm.get('floor')?.invalid &&
+                    userProfileForm.get('floor')?.untouched
+                  "
+                >
+                  <div
+                    *ngIf="userProfileForm.get('floor')?.errors?.['required']"
+                  >
+                    Please select floor
+                  </div>
+                </div>
+              </div>
+              <!-- END:FLOOR -->
+            </div>
+            <!-- END:CITY AND FLOOR -->
+
+            <!-- START:COLUMN AND SEAT NO. -->
+            <div class="row mb-3 seatconfig-info ps-2">
+              <!-- START:COLUMN -->
+              <div class="error-box col-6 ps-0 pe-4">
+                <label for="inputColumn" class="form-label field-label"
+                  >Column <span class="mandatory-field">*</span></label
+                >
+                <ng-select
+                  class="column-input"
+                  placeholder="Select Column"
+                  formControlName="column"
+                  [items]="column"
+                  bindLabel="name"
+                  bindValue="id"
+                  [clearable]="false"
+                  [searchable]="false"
+                  (change)="onChangeColumn($event)"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && userProfileForm.get('column')?.invalid
+                  }"
+                >
+                </ng-select>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="userProfileForm.get('column')?.invalid && userProfileForm.get('column')?.touched && userProfileForm.get('column')?.errors?.['required']"
+                >
+                  Please select column
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    submitted &&
+                    userProfileForm.get('column')?.invalid &&
+                    userProfileForm.get('column')?.untouched
+                  "
+                >
+                  <div
+                    *ngIf="userProfileForm.get('column')?.errors?.['required']"
+                  >
+                    Please select column
+                  </div>
+                </div>
+              </div>
+              <!-- END:COLUMN -->
+
+              <!-- START:SEAT NO. -->
+              <div class="error-box col-6 seatno-field pe-0 ps-3">
+                <label for="inputSeatNo" class="form-label field-label"
+                  >Seat No.<span class="mandatory-field">*</span></label
+                >
+                <ng-select
+                  class="seatno-input"
+                  placeholder="Select Seat No."
+                  formControlName="seat"
+                  [items]="seat"
+                  bindLabel="seatNumber"
+                  bindValue="id"
+                  [clearable]="false"
+                  [searchable]="false"
+                  [ngClass]="{
+                    'is-invalid':
+                      submitted && userProfileForm.get('seat')?.invalid
+                  }"
+                 
+                >
+                </ng-select>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="userProfileForm.get('seat')?.invalid && userProfileForm.get('seat')?.touched && userProfileForm.get('seat')?.errors?.['required']"
+                >
+                  Please select Seat No.
+                </div>
+                <div
+                  class="text-danger validation-fonts"
+                  *ngIf="
+                    submitted &&
+                    userProfileForm.get('seat')?.invalid &&
+                    userProfileForm.get('seat')?.untouched
+                  "
+                >
+                  <div
+                    *ngIf="userProfileForm.get('seat')?.errors?.['required']"
+                  >
+                    Please select Seat No.
+                  </div>
+                </div>
+              </div>
+              <!-- END:SEAT NO. -->
+            </div>
+            <!-- END:COLUMN AND SEAT NO. -->
+          </div>
+        </div>
+        <!-- start : form footer -->
+        <div class="form-buttons d-flex justify-content-between p-2 mt-2">
+          <div>
+            <button
+              class="btn save-btn btn-secondary"
+              type="button"
+              (click)="formCloseConfirmation(formClosingConfirmation)"
+            >
+              Close
+            </button>
+          </div>
+          <div>
+            <button class="btn btn-primary save-btn" type="submit">Save</button>
+          </div>
+        </div>
+        <!-- end : form footer -->
+      </form>
+      <!-- Form ends here -->
+    </div>
+    <!-- Userprofile form:ends -->
+
+    <!-- Userprofile view:starts -->
+    <div *ngIf="isEditable" class="userdetails flex-grow-1 overflow-auto">
+      <div class="d-flex align-items-center p-4">
+        <div class="uploadandeditimg">
+          <img [src]="defaultImageUrl" alt="Upload Img" class="uploading" />
+        </div>
+        <div class="ps-4">
+          <h4 class="fullname">
+            {{ employeeData?.firstName }}
+            {{ employeeData?.lastName }}
+          </h4>
+          <h6 class="useremail my-3">{{ employeeData?.emailId }}</h6>
+          <button
+            class="btn-editprofile border-0"
+            (click)="openProfileForm()"
+            #editProfileButtton
+            [disabled]="isDisable"
+            [ngClass]="{'disable-btn':isDisable}"
+          >
+            EDIT PROFILE
+          </button>
+        </div>
+      </div>
+
+      <div class="wrapper pt-2">
+        <div>
+          <h6 class="info-title">PERSONAL INFORMATION</h6>
+          <div class="row first-row">
+            <div class="col-6 p-0">
+              <div class="d-flex">
+                <img
+                  src="./assets/images/phoneicon.png"
+                  alt=""
+                  class="icon-img"
+                />
+                <div class="ps-3">
+                  <h6 class="user-info-label">PHONE NO</h6>
+                  <h6 class="user-info-value">
+                    {{
+                      employeeData?.phoneNumber
+                        ? employeeData?.phoneNumber
+                        : "-"
+                    }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 p-0">
+              <div class="d-flex">
+                <img
+                  src="./assets/images/designationicon.png"
+                  alt=""
+                  class="icon-img"
+                />
+                <div class="ps-3">
+                  <h6 class="user-info-label">DESIGNATION</h6>
+                  <h6 class="user-info-value">
+                    {{
+                      (employeeData?.designation?.name
+                        ? employeeData?.designation?.name
+                        : "-"
+                      ) | uppercase
+                    }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5">
+            <div class="col-6 p-0">
+              <div class="d-flex">
+                <img
+                  src="./assets/images/cityicon.png"
+                  alt=""
+                  class="icon-img"
+                />
+                <div class="ps-3">
+                  <h6 class="user-info-label">CITY</h6>
+                  <h6 class="user-info-value">
+                    {{
+                      (employeeData?.city?.name
+                        ? employeeData?.city?.name
+                        : "-"
+                      ) | uppercase
+                    }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h6 class="info-title mb-4">SEAT INFORMATION</h6>
+          <div class="row third-row">
+            <div class="col-6 p-0">
+              <div class="d-flex">
+                <img
+                  src="./assets/images/flooricon.png"
+                  alt=""
+                  class="icon-img"
+                />
+                <div class="ps-3">
+                  <h6 class="user-info-label">FLOOR</h6>
+                  <h6 class="user-info-value">
+                    {{
+                      (employeeData?.floor?.name
+                        ? employeeData?.floor?.name
+                        : "-"
+                      ) | uppercase
+                    }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 p-0">
+              <div class="d-flex">
+                <img
+                  src="./assets/images/columnicon.png"
+                  alt=""
+                  class="icon-img"
+                />
+
+                <div class="ps-3">
+                  <h6 class="user-info-label">COLUMN</h6>
+                  <h6 class="user-info-value">
+                    {{
+                      (employeeData?.column?.name
+                        ? employeeData?.column?.name
+                        : "-"
+                      ) | uppercase
+                    }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 p-0">
+              <div class="d-flex">
+                <img
+                  src="./assets/images/seaticon.png"
+                  alt=""
+                  class="icon-img"
+                />
+
+                <div class="ps-3">
+                  <h6 class="user-info-label">SEAT NO</h6>
+                  <h6 class="user-info-value">
+                    {{
+                      employeeData?.seat?.seatNumber
+                        ? employeeData?.seat?.seatNumber
+                        : "-"
+                    }}
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 p-0">
+              <div class="d-flex">
+                <img
+                  src="./assets/images/modeofworkicon.png"
+                  alt=""
+                  class="icon-img"
+                />
+
+                <div class="ps-3">
+                  <h6 class="user-info-label">MODE OF WORK</h6>
+                  <h6 class="user-info-value">
+                    {{
+                      (employeeData?.modeOfWork?.name
+                        ? employeeData?.modeOfWork?.name
+                        : "-"
+                      ) | uppercase
+                    }}
+                    <div *ngIf="selectModeOfWork">
+                      <span *ngFor="let i of employeeData?.days"
+                        >{{ i.day | uppercase | slice : 0 : 3 }}
+                      </span>
+                    </div>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mode Of Work:Ends here -->
+    </div>
+  </div>
+  <!-- Userprofile view:ends -->
+</div>
+<!-- Modal pop-up for validation messages -->
+<ng-template #invalidImageFormat let-modal>
+  <div class="modal-body pb-0">
+    <p class="mb-0 text-center">
+      "Upload valid image, only .jpg and .png are allowed"
+    </p>
+  </div>
+  <div class="modal-footer p-1">
+    <button
+      type="button"
+      class="btn btn-secondary text-white"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+<ng-template #invalidImageSize let-modal>
+  <div class="modal-body pb-0">
+    <p class="mb-0 text-center">
+      "File size exceeds the maximum limit of 2MB. Please choose a smaller
+      file."
+    </p>
+  </div>
+  <div class="modal-footer p-1">
+    <button
+      type="button"
+      class="btn btn-secondary text-white"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+<!-- Modal pop-up for confirmation of closing form without updating data -->
+<ng-template #formClosingConfirmation let-modal>
+  <div class="modal-body">
+    <p class="mb-0 text-center">You have unsaved changes that will be lost</p>
+  </div>
+  <div class="modal-footer p-1">
+    <button
+      type="button"
+      class="btn btn-primary confirmation-btn"
+      (click)="closeForm()"
+      (click)="modal.close('Close click')"
+      routerLink="/"
+    >
+      Yes
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary confirmation-btn"
+      (click)="modal.close('Close click')"
+    >
+      No
+    </button>
+  </div>
+</ng-template>

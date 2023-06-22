@@ -1,0 +1,273 @@
+<div
+  class="admin-history d-flex flex-column overflow-hidden h-100"
+  [ngClass]="[superAdmin ? 'p-4' : 'seat-container ']"
+>
+  <div
+    class="content-title mb-3 d-flex justify-content-between align-items-center"
+  >
+    <h3>Request History</h3>
+    <div class="search-container d-flex">
+      <div class="input-group search-box me-3">
+        <figure class="searchbar mb-0" for="search-name">
+          <img src="assets/images/search.png" alt="search-icon" />
+        </figure>
+        <input
+          type="text"
+          class="form-control search-item"
+          placeholder="Search by name..."
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          id="search-name"
+          (keyup)="searchData(search.value)"
+          [formControl]="searchControl"
+          #search
+          deskBookRestrictSpecialCharacters
+        />
+      </div>
+      <div class="request-filter w-50">
+        <ng-select
+          [items]="filterArr"
+          [searchable]="false"
+          [clearable]="false"
+          bindLabel="name"
+          bindValue="id"
+          placeholder="Select"
+          [clearable]="false"
+          [searchable]="false"
+          (change)="filterData($event)"
+        >
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="table-container overflow-auto flex-grow-1 d-flex flex-column">
+    <table class="table-content" aria-label="request-history-table">
+      <thead>
+        <tr class="content-table-head">
+          <th class="ps-4" scope="col">NO.</th>
+          <th scope="col">NAME</th>
+          <th scope="col">REQUEST DATE</th>
+          <th scope="col">REQUEST FOR</th>
+          <th scope="col">EMAIL</th>
+          <th class="text-center" scope="col">FLOOR NO.</th>
+          <th class="text-center" scope="col">DESK NO.</th>
+          <th class="pe-4 text-center" scope="col">STATUS</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="isFind">
+        <tr
+          class="content-table-data"
+          *ngFor="let user of requestedUser; let i = index"
+        >
+          <td class="requested-data ps-4" title="{{ user.employeeId }}">
+            {{ i + 1 }}
+          </td>
+          <td class="requested-data" title="{{ user.name }}">
+            {{ user.name }}
+          </td>
+          <td class="requested-data" title="{{ user.requestDate }}">
+            {{ user.requestDate }}
+          </td>
+          <td class="requested-data" title="{{ user.requestFor }}">
+            {{ user.requestFor }}
+          </td>
+          <td
+            class="email requested-data"
+            title="{{ superAdmin ? user.email : user.emailId }}"
+          >
+            {{ superAdmin ? user.email : user.emailId }}
+          </td>
+          <td class="requested-data text-center" title="{{ user.floorNo }}">
+            {{ user.floorNo }}
+          </td>
+          <td class="requested-data text-center" title="{{ user.deskNo }}">
+            {{ user.deskNo }}
+          </td>
+          <td class="text-center requested-data" *ngIf="user.status == 1">
+            <ul>
+              <li class="list-none text-center">
+                <a
+                  routerLink="../request-history"
+                  (click)="openVerticallyCentered(requestPopup, user)"
+                  >Take Action</a
+                >
+              </li>
+            </ul>
+          </td>
+          <td
+            class="requested-data text-center"
+            *ngIf="user.status == 2"
+            class="request-accepted text-center"
+          >
+            Accepted
+          </td>
+          <td
+            class="requested-data text-center"
+            *ngIf="user.status == 3"
+            class="request-rejected text-center"
+          >
+            Rejected
+          </td>
+          <ng-template #requestrejected let-modal>
+            <div class="modal-header">
+              <h6 class="modal-title text-center">Are You sure You want to reject this request?</h6>    
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-footer d-flex">
+              <button type="button" class="btn btn-primary"  (click)="modal.dismiss('Cross click')" (click)="requestRejected()">Yes</button>
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <ng-template #requestaccepted let-modal>
+            <div class="modal-header">
+              <h6 class="modal-title text-center">Are You sure You want to accept this request?</h6>    
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-footer d-flex">
+              <button type="button" class="btn btn-primary"  (click)="modal.dismiss('Cross click')" (click)="requestAccepted()">Yes</button>
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <ng-template #requestPopup let-modal>
+            <div class="modal-header take-action-header">
+              <h4 class="modal-title">Take Action</h4>
+              <button
+                type="button"
+                class="btn-close"
+                aria-label="Close"
+                (click)="closeVerticallyCentered()"
+                (click)="modal.dismiss('Cross click')"
+              >
+                <img
+                  src="assets/images/close-icon.png "
+                  class="border border-0"
+                  alt="cross-icon"
+                />
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="model-container d-flex flex-column">
+                <div class="row py-2">
+                  <div class="col-5 model-heading">Requested Date</div>
+                  <div class="col-1">
+                    <span>:</span>
+                  </div>
+                  <div class="col-6">
+                    <h6 class="m-0 model-description">
+                      {{ employee?.requestDate }}
+                    </h6>
+                  </div>
+                </div>
+                <div class="row py-2">
+                  <div class="col-5 model-heading">Requested for</div>
+                  <div class="col-1">
+                    <span>:</span>
+                  </div>
+                  <div class="col-6">
+                    <h6 class="m-0 model-description">
+                      {{
+                        superAdmin
+                          ? employee?.requestedFor
+                          : employee?.requestFor
+                      }}
+                    </h6>
+                  </div>
+                </div>
+                <div class="row py-2">
+                  <div class="col-5 model-heading">Name</div>
+                  <div class="col-1">
+                    <span>:</span>
+                  </div>
+                  <div class="col-6">
+                    <h6 class="m-0 model-description">{{ employee?.name }}</h6>
+                  </div>
+                </div>
+                <div class="row py-2">
+                  <div class="col-5 model-heading">Email</div>
+                  <div class="col-1">
+                    <span>:</span>
+                  </div>
+                  <div class="col-6">
+                    <h6 class="m-0 text-primary">
+                      {{ superAdmin ? employee?.email : employee?.emailId }}
+                    </h6>
+                  </div>
+                </div>
+                <div class="row py-2">
+                  <div class="col-5 model-heading">Floor No.</div>
+                  <div class="col-1">
+                    <span>:</span>
+                  </div>
+                  <div class="col-6">
+                    <h6 class="m-0 model-description">
+                      {{ employee?.floorNo }}
+                    </h6>
+                  </div>
+                </div>
+                <div class="row py-2">
+                  <div class="col-5 model-heading">Desk No.</div>
+                  <div class="col-1">
+                    <span>:</span>
+                  </div>
+                  <div class="col-6">
+                    <h6 class="m-0 model-description">
+                      {{ employee?.deskNo }}
+                    </h6>
+                  </div>
+                </div>
+                <div class="row py-2">
+                  <div class="col-5 model-heading">Reason</div>
+                  <div class="col-1">
+                    <span>:</span>
+                  </div>
+                  <div class="col-6">
+                    <h6 class="m-0 model-description">
+                      {{ employee?.reason }}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <!-- <button
+                class="text-dark btn btn-light border border-dark"
+                (click)="requestRejected()"
+                (click)="modal.dismiss('Cross click')"
+              >
+                REJECT
+              </button> -->
+              <button
+              class="text-dark btn btn-light border border-dark"
+              (click)="requestRejectPopup(requestrejected)"
+              (click)="modal.dismiss('Cross click')"
+            >
+              REJECT
+            </button>
+              <!-- <button
+                class="btn btn-primary text-white"
+                (click)="requestAccepted()" 
+                (click)="modal.dismiss('Cross click')"
+              >
+                ACCEPT
+              </button> -->
+              <button
+              class="btn btn-primary text-white"
+              (click)="requestAcceptPopup(requestaccepted)"
+              (click)="modal.dismiss('Cross click')"
+            >
+              ACCEPT
+            </button>
+            </div>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      *ngIf="!isFind"
+      class="d-flex justify-content-center align-items-center flex-grow-1"
+    >
+      <h3>No Record Found</h3>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

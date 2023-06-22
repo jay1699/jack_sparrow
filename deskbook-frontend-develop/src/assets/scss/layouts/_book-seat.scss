@@ -1,0 +1,210 @@
+.main-border {
+  border: 1px solid $border-color;
+  border-radius: 6px;
+}
+
+ul {
+  list-style-type: none;
+
+  .color-list-item {
+    font-family: $font-family-base;
+    font-weight: $font-weight-semibold; //600
+    font-size: $font-size-base; //16px
+    color: $text-muted;
+    height: 30px;
+  }
+  &.title-list {
+    padding-left: 0px !important;
+    margin-bottom: 26px;
+  }
+}
+
+.floor-title {
+  font-family: $font-family-base;
+  font-weight: $font-weight-bold; //700
+  font-size: $font-size-subtitle;
+  color: $text-primary;
+}
+
+.seat-color {
+  height: 18px;
+  width: 18px;
+  border-radius: 2px;
+}
+
+.reserved-color {
+  background-color: $reserved-seat-color;
+}
+
+.available-color {
+  background-color: $available-seat-color;
+}
+
+.booked-color {
+  background-color: $light-blue-color;
+}
+
+.unavailable-color {
+  background-color: $dark-yellow;
+}
+
+.unassigned-color {
+  background-color: $text-muted;
+}
+
+.main-wrapper {
+  border: 1px solid $border-muted;
+  border-radius: 6px;
+}
+
+.employee-seat-thead {
+  position: sticky;
+  top: 0;
+}
+
+.seat-table {
+  tr {
+    border-bottom: 1px solid $border-color;
+
+    th {
+      font-size: $table-font-size;
+      font-weight: $font-weight-bold;
+      color: $text-primary;
+    }
+
+    td {
+      height: 80px;
+      padding: 15px 30px;
+    }
+  }
+}
+.table-wrapper table:nth-child(1) {
+  td {
+    border-right: 1px solid $border-color;
+  }
+}
+
+//sr.number style
+.sr-no-table {
+  td {
+    font-size: $table-font-size;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+  }
+}
+
+//calander style
+.ngb-dp-weekday {
+  font-style: normal !important;
+  font-weight: 600;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+}
+
+.receivedSeat {
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
+}
+
+.bookedSeat {
+  background-image: url("../../images/booked-seat.png");
+}
+
+.reservedSeat {
+  background-image: url("../../images/reserved-seat.png");
+}
+
+.availableforBookingSeat {
+  background-image: url("../../images/available-seat.png");
+}
+
+.unavailableSeat {
+  background-image: url("../../images/unavailable-seat.png");
+}
+
+.unallocatedSeat {
+  background-image: url("../../images/seat.png");
+}
+
+//Book-Seat
+.Booked {
+  background-image: url("../../images/booked-seat.png");
+}
+
+.Reserved {
+  background-image: url("../../images/reserved-seat.png");
+}
+
+.Available {
+  background-image: url("../../images/available-seat.png");
+}
+
+.Unavailable {
+  background-image: url("../../images/unavailable-seat.png");
+}
+
+.Unassigned {
+  background-image: url("../../images/seat.png");
+}
+
+//Book-Seat
+.Booked {
+  background-image: url("../../images/booked-seat.png");
+}
+
+.Reserved {
+  background-image: url("../../images/reserved-seat.png");
+}
+
+.Available {
+  background-image: url("../../images/available-seat.png");
+}
+
+.Unavailable {
+  background-image: url("../../images/unavailable-seat.png");
+}
+
+.Unassigned {
+  background-image: url("../../images/seat.png");
+}
+
+// @media (min-width: 768px) and (max-width: 991.99px) {
+//   .seat-container {
+//     width: 100%;
+//     // max-width: 720px;
+//   }
+// }
+
+// @media (min-width: 992px) and (max-width: 1199.99px) {
+//   .seat-container {
+//     width: 100%;
+//     // max-width: 920px;
+//   }
+// }
+
+// @media (min-width: 1200px) and (max-width: 1399.99px) {
+//   .seat-container {
+//     width: 100%;
+//     // max-width: 1080px;
+//   }
+// }
+
+// @media (min-width: 1400px) and (max-width: 1599.99px) {
+//   .seat-container {
+//     width: 100%;
+//     // max-width: 1280px;
+//   }
+// }
+// @media (min-width: 1600px) and (max-width: 1799.99px) {
+//   .seat-container {
+//     width: 100%;
+//     // max-width: 1440px;
+//   }
+// }
+// @media (min-width: 1800px) {
+//   .seat-container {
+//     width: 100%;
+//     // max-width: 1700px;
+//   }
+// }

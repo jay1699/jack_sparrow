@@ -1,0 +1,316 @@
+<section class="d-flex registration overflow-auto">
+  <div class="registration-wrapper m-sm-auto">
+    <div class="form-wrapper">
+      <figure class="form-logo text-center mb-0 p-4">
+        <img
+          class="deskbook-logo"
+          src="../../../assets/images/db-icon.png"
+          alt="Logo"
+        />
+        <figcaption class="text-secondary-dark logo-text mb-0 mt-3">
+          DeskBook
+        </figcaption>
+      </figure>
+      <form
+        [formGroup]="signupform"
+        (ngSubmit)="registerEmployee()"
+        class="form-content"
+      >
+        <div class="form-group mb-0">
+          <div class="field-group">
+            <input
+              type="text"
+              class="input-box"
+              required
+              formControlName="firstname"
+              noWhitespace
+            />
+            <span class="fa-solid fa-user icons"></span>
+            <label class="label-box">First Name</label>
+          </div>
+          <span
+            class="text-danger error-font"
+            *ngIf="signupform.get('firstname')?.errors?.['required'] && signupform.get('firstname')?.touched"
+          >
+            <!-- Error message for firstname required -->
+            Please enter your First Name
+          </span>
+          <div
+            *ngIf="
+              signupform.get('firstname')?.touched &&
+              signupform.get('firstname')?.invalid
+            "
+          >
+            <span
+              class="text-danger error-font"
+              *ngIf="!signupform.get('firstname')?.errors?.['pattern'] && signupform.get('firstname')?.errors?.['minlength']"
+            >
+              <!-- Error message for firstname for minimum length-->
+            </span>
+          </div>
+
+          <div
+            *ngIf="
+              signupform.get('firstname')?.touched &&
+              signupform.get('firstname')?.invalid
+            "
+          >
+            <span
+              class="text-danger error-font"
+              *ngIf="!signupform.get('firstname')?.errors?.['pattern'] && signupform.get('firstname')?.errors?.['maxlength']"
+            >
+              <!-- Error message for firstname for minimum length-->
+              Your first name cannot exceed 100 characters
+            </span>
+          </div>
+
+          <span
+            class="text-danger error-font"
+            *ngIf="signupform.get('firstname')?.errors?.['pattern']"
+          >
+            <!-- Error message for firstname for minimum length-->
+            Please enter a valid first Name
+          </span>
+          <div class="field-group">
+            <input
+              type="text"
+              required
+              class="input-box"
+              formControlName="lastname"
+              noWhitespace
+            />
+            <span class="fa-solid fa-user icons"></span>
+            <label class="label-box">Last Name</label>
+          </div>
+          <span
+            class="text-danger error-font"
+            *ngIf="signupform.get('lastname')?.errors?.['required'] && signupform.get('lastname')?.touched"
+          >
+            <!-- Error message for lastname required -->
+            Please enter your Last Name
+          </span>
+
+          <div
+            *ngIf="
+              signupform.get('lastname')?.touched &&
+              signupform.get('lastname')?.invalid
+            "
+          >
+            <span
+              class="text-danger error-font"
+              *ngIf="!signupform.get('lastname')?.errors?.['pattern'] && signupform.get('lastname')?.errors?.['minlength']"
+            >
+              <!-- Error message for lastname for minimum length-->
+            </span>
+          </div>
+
+          <div
+            *ngIf="
+              signupform.get('lastname')?.touched &&
+              signupform.get('lastname')?.invalid
+            "
+          >
+            <span
+              class="text-danger error-font"
+              *ngIf="!signupform.get('lastname')?.errors?.['pattern'] && signupform.get('lastname')?.errors?.['maxlength']"
+            >
+              <!-- Error message for lastname for minimum length-->
+              Your Last name cannot exceed 100 characters
+            </span>
+          </div>
+
+          <span
+            class="text-danger error-font"
+            *ngIf="signupform.get('lastname')?.errors?.['pattern']"
+          >
+            <!-- Error message for lastname for minimum length-->
+            Please enter a valid Last Name
+          </span>
+          <div class="field-group">
+            <input
+              type="text"
+              required
+              class="input-box"
+              formControlName="email"
+            />
+            <span class="fa-regular fa-envelope icons"></span>
+            <label class="label-box">Email</label>
+          </div>
+          <span
+            class="text-danger error-font"
+            *ngIf="signupform.get('email')?.errors?.['required'] && signupform.get('email')?.touched"
+          >
+            <!-- Error message for email required -->
+            Please enter your Email
+          </span>
+
+          <div
+            *ngIf="
+              signupform.get('email')?.touched &&
+              signupform.get('email')?.invalid
+            "
+          >
+            <span
+              class="text-danger error-font"
+              *ngIf="!signupform.get('email')?.errors?.['pattern'] && signupform.get('email')?.errors?.['minlength']"
+            >
+              <!-- Error message for email for minimum length-->
+              Email must be of 3 characters or more
+            </span>
+          </div>
+
+          <div
+            *ngIf="
+              signupform.get('email')?.touched &&
+              signupform.get('email')?.invalid
+            "
+          >
+            <span
+              class="text-danger error-font"
+              *ngIf="signupform.get('email')?.errors && signupform.get('email')?.errors?.['maxlength']"
+            >
+              <!-- Error message for email for minimum length-->
+              Your Email cannot exceed 80 characters
+            </span>
+            <span
+              class="text-danger error-font"
+              *ngIf="signupform.get('email')?.errors?.['pattern']"
+            >
+              <!-- Error message for email for minimum length-->
+              Please enter a valid Email
+            </span>
+          </div>
+
+          <div class="field-group">
+            <input
+              [type]="passwordType"
+              required
+              class="input-box"
+              formControlName="password"
+              #password
+              (keyup)="passwordValue(password.value)"
+              (keyup)="confirmPasswordValue(confirmpassword.value)"
+              name="password"
+            />
+            <span class="fa-sharp fa-solid fa-key icons"></span>
+            <span
+              *ngIf="!showpassword"
+              class="fa-solid fa-eye-slash eye-icon"
+              (mousedown)="togglePassword()"
+            ></span>
+            <span
+              *ngIf="showpassword"
+              class="fa-solid fa-eye eye-icon"
+              (mouseup)="toggleshowPassword()"
+            ></span>
+            <label class="label-box">Password</label>
+          </div>
+          <span
+            class="text-danger error-font"
+            *ngIf="signupform.get('password')?.errors?.['required'] && signupform.get('password')?.touched"
+          >
+            <!-- Error message for password required -->
+            Please enter your Password
+          </span>
+
+          <div
+            *ngIf="
+              signupform.get('password')?.touched &&
+              signupform.get('password')?.invalid
+            "
+          >
+            <span
+              class="text-danger error-font"
+              *ngIf="signupform.get('password')?.errors && signupform.get('password')?.errors?.['minlength']"
+            >
+              <!-- Error message for password for minimum length-->
+              Password must be at least 8 characters long
+            </span>
+          </div>
+
+          <div
+            *ngIf="
+              signupform.get('password')?.touched &&
+              signupform.get('password')?.invalid
+            "
+          >
+            <span
+              class="text-danger error-font"
+              *ngIf="signupform.get('password')?.errors && signupform.get('password')?.errors?.['maxlength']"
+            >
+              <!-- Error message for password for minimum length-->
+              Your Password cannot exceed 25 characters
+            </span>
+          </div>
+
+          <span
+            class="text-danger error-font"
+            *ngIf="signupform.get('password')?.touched && signupform.get('password')?.invalid &&signupform.get('password')?.errors?.['pattern']"
+          >
+            <!-- Error message for password for minimum length-->
+            At least 1 uppercase alphabet, 1 Special Character and 1 numeric
+            value required
+          </span>
+          <div class="field-group">
+            <input
+              [type]="confirmpasswordType"
+              required
+              class="input-box"
+              formControlName="confirmpassword"
+              id="confirmpassword"
+              (keyup)="confirmPasswordValue(confirmpassword.value)"
+              #confirmpassword
+            />
+            <span class="fa-sharp fa-solid fa-key icons"></span>
+            <span
+              *ngIf="!showConfirmpassword"
+              class="fa-solid fa-eye-slash eye-icon"
+              (mousedown)="toggleConfirmPassword()"
+            ></span>
+            <span
+              *ngIf="showConfirmpassword"
+              class="fa-solid fa-eye eye-icon"
+              (mouseup)="toggleConfirmshowPassword()"
+            ></span>
+            <label class="label-box">Confirm Password</label>
+          </div>
+          <span
+            class="text-danger error-font"
+            *ngIf="signupform.get('confirmpassword')?.touched && signupform.get('confirmpassword')?.invalid &&signupform.get('confirmpassword')?.errors?.['required']"
+          >
+            Please enter your confirm password
+          </span>
+          <span
+            class="error-font text-danger"
+            [ngStyle]="{ display: repeatpass }"
+          >
+            Password does not match.</span
+          >
+        </div>
+        <div
+          class="d-flex flex-column flex-sm-row align-items-center justify-content-between mt-3"
+        >
+          <div class="mb-2 mb-sm-0">
+            <button
+              type="button"
+              class="btn btn-signin"
+              (click)="backToLogin()"
+            >
+              Back to Sign In
+            </button>
+          </div>
+          <div class="">
+            <button
+              class="btn btn-danger px-4 py-2"
+              type="submit"
+              title="Sign In"
+              (click)="validate()"
+            >
+              Register
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

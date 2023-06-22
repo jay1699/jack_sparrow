@@ -1,0 +1,58 @@
+// start : admin header
+.btn-icon {
+  border: 0;
+  width: 50px;
+  border-radius: 5px;
+}
+.db-heading {
+  box-shadow: inset 0px -3px 4px -3px rgb(225, 223, 226);
+  height: 70px;
+
+  .fa-bars {
+    cursor: pointer;
+    color: $text-muted;
+  }
+  .humburger-toggle-switch {
+    cursor: pointer;
+    width: 20px;
+  }
+}
+//   end : admin header
+
+// start : admin footer
+.admin-footer {
+  box-shadow: inset 0px 3px 4px -3px rgb(225, 223, 226);
+}
+//   end : admin footer
+
+// start : landing page
+
+.landing-page {
+  width: 100%;
+  max-width: 450px;
+
+  .landing-page-info {
+    font-weight: 400;
+    font-size: 16px;
+    color: $text-gray-400;
+  }
+
+  .btn-bookseat {
+    width: 100%;
+    max-width: 400px;
+    color: $white;
+  }
+
+  .landing-page-image {
+    margin-top: 60px;
+  }
+
+  .seat-release {
+    color: $white;
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+// end : landing page

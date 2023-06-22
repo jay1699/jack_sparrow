@@ -1,0 +1,243 @@
+<!-- starts:seat-configuration content -->
+<div
+  class="container-fluid d-flex flex-column seat-configuration-content h-100 overflow-hidden"
+>
+  <!-- selector of seat-configuration header -->
+  <desk-book-seat-configuration-header
+    (selectedFloorValueEvent)="receivedFloor($event)"
+    (openSeatConfigEvent)="openSeatConfig($event)"
+  ></desk-book-seat-configuration-header>
+
+  <div
+    class="d-flex justify-content-center align-items-center flex-grow-1"
+    *ngIf="!seatConfigVisible"
+  >
+    <h3 class="select-city-message">Select City and Floor</h3>
+  </div>
+
+  <div
+    class="main-wrapper h-100 p-3 mb-3 d-flex flex-column seat-config-table overflow-auto"
+    *ngIf="seatConfigVisible"
+  >
+    <!-- starts: seat-configuration-header -->
+    <div class="d-flex g-0 flex-column flex-md-row">
+      <h3 class="floor-title">{{ selectedFloorValue.floorName }}</h3>
+      <!-- starts: list of colors representing the seats -->
+      <ul
+        class="d-flex justify-content-start justify-content-md-end flex-md-row title-list flex-wrap flex-grow-1"
+      >
+        <li
+          *ngFor="let seat of seatTypes"
+          class="d-flex align-items-center me-3"
+        >
+          <span
+            class="reserved-color seat-color"
+            class="{{ seat.color }}"
+          ></span>
+          <span class="color-list-item ms-1 d-flex align-items-center">{{
+            seat.name
+          }}</span>
+        </li>
+      </ul>
+
+      <!-- ends: list of colors representing the seats -->
+    </div>
+    <!-- ends: seat-configuration-header -->
+    <section class="d-flex flex-grow-1 overflow-auto">
+      <!-- starts: list of seats -->
+
+      <div class="d-flex">
+        <table class="table sr-no-table" aria-label="Seat Configuration Table">
+          <thead>
+            <tr>
+              <th scope="col">
+                <h6 class="invisible mb-0">sr no.</h6>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="addButtonVisible" class="table-index">
+              <span class="invisible">sr no.</span>
+            </tr>
+            <tr *ngFor="let srNo of indexArray" class="table-index">
+              <td>{{ srNo }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex w-100 justify-content-between" #TableContainer>
+        <ng-container *ngFor="let header of tableHeaders; let i = index">
+          <div class="d-flex table-wrapper" *ngIf="i % 2 === 0">
+            <table
+              class="seat-table position-relative"
+              aria-label="even-seat-table"
+            >
+              <thead class="text-center">
+                <tr class="border-bottom">
+                  <th scope="col">{{ tableHeaders[i] }}</th>
+                </tr>
+              </thead>
+              <tbody #tableBody1 id="tableBody1">
+                <ng-container
+                  *ngFor="let data of seats | filterSeat : tableHeaders[i]"
+                >
+                  <ng-container *ngIf="data.seatNumber == 1">
+                    <tr *ngIf="addButtonVisible">
+                      <td class="employee-seat-table-thead">
+                        <div class="custom-model">
+                          <button
+                            class="border-0 add-btn"
+                            (click)="getTotalRows(data, tableBody1, content)"
+                          >
+                            <img
+                              src="./assets/images/add-btn-icon.png"
+                              alt="plus-icon"
+                            />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <tr>
+                    <td
+                      *ngIf="data.columnName == tableHeaders[i]"
+                      class="employee-seat-table-thead"
+                    >
+                      <div class="custom-popover">
+                        <button
+                          class="border-0 receivedSeat"
+                          placement="auto"
+                          [ngbPopover]="
+                            data.seatId && showPopover && hidePopoverOnPlus
+                              ? reservedPopContent
+                              : ''
+                          "
+                          class="{{ data.seatType }}"
+                          id="{{ data.seatId }}"
+                          (click)="getSeatId($event)"
+                          name="{{ data.seatType }}"
+                        ></button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+            <table
+              class="seat-table position-relative"
+              aria-label="odd-seat-table"
+            >
+              <thead class="text-center">
+                <tr class="border-bottom">
+                  <th scope="col">{{ tableHeaders[i + 1] }}</th>
+                </tr>
+              </thead>
+              <tbody #tableBody2 id="tableBody2">
+                <ng-container
+                  *ngFor="let data of seats | filterSeat : tableHeaders[i + 1]"
+                >
+                  <ng-container *ngIf="data.seatNumber == 1">
+                    <tr *ngIf="addButtonVisible">
+                      <td>
+                        <div class="custom-model">
+                          <button
+                            class="border-0 add-btn"
+                            (click)="getTotalRows(data, tableBody2, content)"
+                          >
+                            <img
+                              src=" ./assets/images/add-btn-icon.png"
+                              alt="plus-icon"
+                            />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <tr>
+                    <td *ngIf="data.columnName == tableHeaders[i + 1]">
+                      <div class="custom-popover">
+                        <button
+                          class="border-0 receivedSeat"
+                          placement="auto"
+                          [ngbPopover]="
+                            data.seatId && showPopover && hidePopoverOnPlus
+                              ? reservedPopContent
+                              : ''
+                          "
+                          class="{{ data.seatType }}"
+                          id="{{ data.seatId }}"
+                          (click)="getSeatId($event)"
+                          name="{{ data.seatType }}"
+                        ></button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+  </div>
+</div>
+
+<desk-book-admin-footer
+  (addButtonVisibleEvent)="addButton($event)"
+></desk-book-admin-footer>
+<!-- *ngIf="adminFooterVisible" -->
+
+<!-- ends:seat-configuration main content -->
+
+<ng-template #reservedPopContent>
+  <ul class="popover-message p-4">
+    <li class="popover-list">
+      <h6 class="admin-popover">Manage</h6>
+    </li>
+    <li class="popover-list admin-popover-content">
+      <span>What would you like to do?</span>
+    </li>
+
+    <div class="d-flex justify-content-between">
+      <button
+        type="button"
+        class="btn btn-secondary me-3 unassign"
+        (click)="unassignSeat($event)"
+        [disabled]="isUnassignBtnDisable"
+      >
+        UNASSIGN
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-warning text-white unavailable"
+        (click)="unavailableSeat($event)"
+        [disabled]="isUnavailableBtnDisable"
+      >
+        UNAVAILABLE
+      </button>
+    </div>
+  </ul>
+</ng-template>
+
+<!-- STTARTS: admin model  -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <img src="assets/images/close-icon.png" alt="cross-icon" />
+    </button>
+  </div>
+  <div class="d-flex justify-content-center model-message">
+    <p class="popup-message text-center seatFullMessage">
+      Maximum limit to add seat in one column is 15 and capacity of one floor is
+      150 seats
+    </p>
+  </div>
+</ng-template>
+<router-outlet></router-outlet>

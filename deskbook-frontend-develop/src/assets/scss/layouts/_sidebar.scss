@@ -1,0 +1,107 @@
+.sidebar {
+  width: 70px;
+  height: 100%;
+  box-shadow: inset -3px 0px 6px -3px rgb(225, 223, 226);
+  transition: 0.4s ease-in-out;
+
+  .logo-deskbook {
+    box-shadow: inset 0px -3px 4px -3px rgb(225, 223, 226);
+    height: 70px;
+
+    .header-icon {
+      width: 45px;
+      display: inline-block;
+    }
+  }
+
+  .dashboard-link {
+    padding: 12px 16px;
+  }
+
+  .sidemenu {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .deskbook-heading {
+    font-family: $font-family-baloo;
+    display: none;
+    vertical-align: text-top;
+  }
+
+  .nav-text {
+    display: none;
+  }
+
+  .nav-item {
+    color: $text-muted;
+
+    &:not(:last-child) {
+      padding-bottom: 6px;
+    }
+    .nav-text {
+      display: none;
+    }
+    .sidebar-fist-text {
+      margin-left: 12px;
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    &.active,
+    &:hover {
+      background-color: #eaf2fe;
+      color: #2880fc;
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 13px;
+        background-color: #2984f7;
+        height: 30px;
+        width: 4px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        transition: 0.4s all;
+      }
+    }
+  }
+
+  .sidebar-icons {
+    width: 22px;
+  }
+
+  .sidebar-list {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+#toggle:checked + .sidebar {
+  transform: translateX(0px);
+  width: 230px;
+
+  .deskbook-heading,
+  .nav-text,
+  .header-icon {
+    transition: 0.4s all;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .header-icon {
+    margin-right: 12px;
+  }
+}
+
+#toggle {
+  display: none;
+}
+
+// popup message for seatconfiguration
+.model-content {
+  margin-bottom: 58px;
+  font-size: $body-font-size;
+  font-weight: $font-weight-bold;
+  color: $modal-color;
+}

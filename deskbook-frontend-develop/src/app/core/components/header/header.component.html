@@ -1,0 +1,133 @@
+<nav class="header-nav navbar navbar-expand-lg w-100">
+  <div class="header container-fluid d-flex overflow-hidden">
+    <a class="logo d-flex text-decoration-none"
+      ><img
+        class="logo-img mx-2"
+        src="assets/images/db-icon.png"
+        alt=""
+        routerLink="landing-page"
+      />
+      <h1 class="navbar-brand" routerLink="landing-page">DeskBook</h1>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse justify-content-center"
+      id="navbarSupportedContent"
+    >
+      <ul class="nav d-flex justify-content-between">
+        <li class="nav-item pe-5">
+          <a
+            class="nav-link li-book-seat"
+            (click)="isUserUpdated(userIsUpdated, userIsActive)"
+            >Book Seat</a
+          >
+        </li>
+
+        <li class="nav-item px-5">
+          <a
+            class="nav-link li-book-histor"
+            (click)="isUserUpdatedBooking(userIsUpdated, userIsActive)"
+            >Booking History</a
+          >
+        </li>
+        <li class="nav-item ps-5">
+          <a
+            class="nav-link li-book-request"
+            (click)="isUserUpdatedRequest(userIsUpdated, userIsActive)"
+            >Request History</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="user-action d-flex align-items-center">
+      <form class="" role="search">
+        <div
+          class="nav-icon d-flex align-items-center justify-content-center mx-2"
+        >
+          <button type="button" class="border-0 btnsearch">
+            <img
+              class="search-icon"
+              src="assets/images/search-icon.png"
+              alt="search-icon"
+            />
+          </button>
+        </div>
+      </form>
+      <div class="nav-icon d-flex align-items-center justify-content-center">
+        <img
+          class="bell-icon"
+          src="assets/images/bell-icon.png"
+          alt="bell-icon"
+        />
+      </div>
+      <div
+        class="nav-icon d-flex align-items-center justify-content-center mx-2"
+        title="user-profile"
+      >
+        <button class="border-0 btnuser" routerLink="landing-page/user-profile">
+          <img
+            class="user-icon"
+            src="assets/images/user-ico.png"
+            alt="user-icon"
+          />
+        </button>
+      </div>
+      <button type="button" class="btn btn-logout" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>
+<ng-template #userIsUpdated let-modal>
+  <div class="modal-body">
+    <p class="mb-0 text-center">
+      To access deskbook feature,Please update your profile
+    </p>
+  </div>
+  <div class="modal-footer p-1">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="modal.close('Close click')"
+      (click)="userProfile()"
+    >
+      Ok
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="modal.close('Close click')"
+    >
+      Cancel
+    </button>
+  </div>
+</ng-template>
+<ng-template #userIsActive let-modal>
+  <div class="modal-body">
+    <p class="mb-0 text-center">
+      You are an Inactive user. Please contact your administrator
+    </p>
+  </div>
+  <div class="modal-footer p-1">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="modal.close('Close click')"
+      (click)="logout()"
+    >
+      Ok
+    </button>
+  </div>
+</ng-template>

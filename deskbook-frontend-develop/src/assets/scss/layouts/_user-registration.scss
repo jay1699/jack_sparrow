@@ -1,0 +1,182 @@
+.registration {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.58)),
+    url(../../images/Splash_DRC.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  height: 100%;
+
+  .form-wrapper {
+    width: 450px;
+    max-width: 100%;
+    margin: 1rem 0;
+    // -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.3rem;
+    background-color: rgb(0, 0, 0);
+  }
+
+  .form-logo {
+    // padding: 3rem 2rem;
+
+    .logo-text {
+      color: $text-gray-300;
+    }
+  }
+
+  .deskbook-logo {
+    max-width: 100%;
+    height: 50px;
+  }
+
+  .form-content {
+    padding: 0 3rem 3rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+
+    .icons {
+      left: 14px;
+      top: 21px;
+      position: absolute;
+      color: $white;
+    }
+
+    .eye-icon {
+      left: 90%;
+      top: 21px;
+      position: absolute;
+      color: $white;
+      cursor: pointer;
+    }
+  }
+
+  .form-content {
+    padding: 0 3rem 3rem;
+  }
+
+  .field-group {
+    position: relative;
+    margin: 20px 2px 0px 2px;
+  }
+
+  .input-box {
+    display: inline-block;
+    border: 2px solid $input-border;
+    border-radius: 0.3rem;
+    color: $white;
+    background-color: $bg-dark;
+    padding: 10px 10px 10px 40px;
+    width: 100%;
+    height: 60px;
+  }
+
+  .input-box:focus {
+    background-color: $bg-dark;
+    outline: 0;
+    border-color: $bg-red;
+  }
+
+  .label-box {
+    color: #999;
+    position: absolute;
+    pointer-events: none;
+    left: 40px;
+    top: 17px;
+    transition: 0.2s;
+  }
+
+  .input-box:focus ~ .label-box,
+  .input-box:valid ~ .label-box {
+    top: -10px;
+    left: 15px;
+    font-size: small;
+    color: $white;
+    background-color: $bg-dark;
+    padding: 0 5px 0 5px;
+  }
+
+  .input-box:focus ~ .label-box,
+  .input-box:valid ~ .label-box {
+    top: -10px;
+    left: 15px;
+    font-size: small;
+    color: $white;
+    background-color: $bg-dark;
+    padding: 0 5px 0 5px;
+  }
+
+  .btn-danger {
+    background-color: $bs-btn-bg;
+    &:hover {
+      background-color: $bs-btn-hover-bg;
+    }
+  }
+
+  .sign-in-content-text {
+    color: $white;
+
+    a {
+      color: $bg-red;
+    }
+  }
+
+  .btn-signin {
+    border-color: $bg-red;
+    color: $bg-red;
+    --bs-btn-focus-shadow-rgb: 225, 83, 97;
+  }
+
+  .btn-signin:hover {
+    background-color: $bs-btn-hover-bg;
+    color: $white;
+  }
+
+  .error-font {
+    font-size: 14px;
+  }
+
+  .input-box.ng-invalid.ng-touched {
+    border: $bg-red 2px solid;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .registration {
+    justify-content: start;
+    align-items: start;
+  }
+
+  .error-font {
+    font-size: 14px;
+  }
+
+  .input-box.ng-invalid.ng-touched {
+    border: $bg-red 2px solid;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .registration {
+    justify-content: start;
+    align-items: start;
+    background: $bg-dark;
+  }
+
+  .registration-wrapper {
+    width: 100%;
+
+    .form-wrapper {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+
+      .form-wrapper {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}

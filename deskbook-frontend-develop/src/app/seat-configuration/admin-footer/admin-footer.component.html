@@ -1,0 +1,12 @@
+<div class="admin-footer py-2 px-3 d-flex justify-content-end">
+  <!-- start: to show add button on manage click -->
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="isDisabled"
+    (click)="isClicked ? toShowAddButton() : addNewSeats()"
+  >
+    {{ isClicked ? "Manage" : "Save" }}
+  </button>
+</div>

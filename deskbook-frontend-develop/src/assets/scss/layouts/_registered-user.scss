@@ -1,0 +1,106 @@
+.search-box {
+  width: 320px;
+  line-height: 0;
+  background-color: inherit;
+
+  .form-control {
+    box-shadow: none;
+    font-size: 14px;
+
+    .input-group {
+      font-size: 14px;
+    }
+  }
+}
+
+.search-bar {
+  background-color: $bg-grey;
+}
+
+.search-item {
+  border-left: none;
+  border: 0;
+  border-right: none;
+  background-color: $bg-grey;
+}
+
+.search-item:focus,
+.search-item:active {
+  box-shadow: none;
+  background-color: $bg-grey;
+}
+
+.toggle-switch {
+  width: 135px;
+}
+
+.form-check {
+  min-height: 0;
+}
+
+.edit-ellipsis-btn {
+  border: 1.5px solid $text-muted;
+  background-color: $white;
+  border-radius: 50%;
+  padding: 7px 8px;
+
+  &:hover {
+    cursor: not-allowed;
+
+    &:not([disabled]) {
+      cursor: pointer;
+      color: $DodgerBlue-color;
+      border-color: $DodgerBlue-color;
+    }
+  }
+
+  .fa-ellipsis-h {
+    color: $text-muted;
+    font-size: 800;
+
+    &:hover {
+      color: $DodgerBlue-color;
+    }
+  }
+}
+
+.registered-table-data {
+  td {
+    line-height: 0;
+  }
+}
+
+.employee-data {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 50px;
+}
+
+.employee-name {
+  max-width: 100px;
+}
+
+.email {
+  max-width: 130px;
+}
+
+.form-check-input {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #afb8c7;
+  border-radius: 5px;
+}

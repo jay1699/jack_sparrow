@@ -1,0 +1,27 @@
+<!-- sarts: seat-configuration header  -->
+<div class="container-fluid d-flex justify-content-between flex-column flex-md-row header-selection py-4 px-0">
+  <h2 class="title">Seat Configuration</h2>
+  <div class="flex-wrap d-flex justify-content-between flex-md-row header-selection gap-2">
+    <!-- START:city -->
+    <div class="select-option d-flex align-items-center">
+      <label class="header-list me-2">City:</label>
+      <ng-select [items]="cities" [formControl]="city" class="header-list-option placeholder" placeholder="Select City"
+        [clearable]="false" [searchable]="false" bindLabel="cityName" bindValue="cityId" [readonly]="dropDownDisable"
+        (change)="onCitySelect($event)">
+      </ng-select>
+    </div>
+    <!-- ENDS:city -->
+    <!-- START:floor -->
+    <div class="select-option d-flex align-items-center">
+      <label class="header-list me-2">Floor:</label>
+      <ng-select [items]="floors" [formControl]="floor" bindLabel="floorName" bindValue="floorId"
+        placeholder="Select Floor" [clearable]="false" [searchable]="false" [readonly]="dropDownDisable"
+        [readonly]="isDisabled" class="header-list-option placeholder" (change)="onChangeFloor($event)">
+      </ng-select>
+    </div>
+
+    <!-- ENDS:floor -->
+  </div>
+  <!-- ends: seat-configuration-header list-->
+</div>
+<!-- ends: seat-configuration header  -->

@@ -1,0 +1,571 @@
+<!-- starts:book-seat  content -->
+<div class="container-fluid d-flex flex-column seat-container h-100 w-100">
+  <!-- selector of bookseat-header -->
+  <desk-book-book-seat-header></desk-book-book-seat-header>
+  <!-- (selectedFloorValueEvent)="receivedFloor($event)"
+    (openSeatConfigEvent)="openSeatConfig($event)" -->
+  <div
+    class="d-flex justify-content-center align-items-center flex-grow-1 main-wrapper"
+    *ngIf="!showBookSeat"
+  >
+    <h3 class="select-city-message">Select Date,City and Floor</h3>
+  </div>
+  <div
+    class="main-wrapper p-3 mb-3 d-flex flex-column overflow-auto"
+    *ngIf="showBookSeat"
+  >
+    <!-- starts: book-seat-header -->
+    <div class="d-flex g-0 flex-column flex-md-row">
+      <div class="p-0">
+        <h3 class="floor-title">{{ floorname }}</h3>
+      </div>
+      <!-- starts: list of colors representing the seats -->
+      <ul
+        class="d-flex justify-content-start justify-content-md-end flex-md-row title-list flex-wrap flex-grow-1"
+      >
+        <li>
+          <div class="d-flex align-items-center me-2">
+            <span class="reserved-color seat-color"></span>
+            <span class="color-list-item ms-1 d-flex align-items-center"
+              >Reserved</span
+            >
+          </div>
+        </li>
+        <li class="d-flex align-items-center me-2">
+          <div class="d-flex align-items-center mx-3">
+            <span class="available-color seat-color"></span>
+            <span class="color-list-item mx-1 d-flex align-items-center"
+              >Available</span
+            >
+          </div>
+        </li>
+        <li>
+          <div class="d-flex align-items-center me-2">
+            <span class="booked-color seat-color"></span>
+            <span class="color-list-item mx-1 d-flex align-items-center"
+              >Booked</span
+            >
+          </div>
+        </li>
+        <li class="d-flex align-items-center me-2">
+          <div class="d-flex align-items-center mx-3">
+            <span class="unavailable-color seat-color"></span>
+            <span class="color-list-item mx-1 d-flex align-items-center"
+              >Unavailable</span
+            >
+          </div>
+        </li>
+        <li class="d-flex align-items-center me-2">
+          <div class="d-flex align-items-center me-2">
+            <span class="unassigned-color seat-color"></span>
+            <span class="color-list-item mx-1 d-flex align-items-center"
+              >Unassigned</span
+            >
+          </div>
+        </li>
+      </ul>
+      <!-- ends: list of colors representing the seats -->
+    </div>
+    <!-- ends: book-seat-header -->
+    <section class="d-flex overflow-auto h-100 w-100">
+      <!-- starts: list of seats -->
+      <div class="d-flex w-100">
+        <div class="d-flex">
+          <table class="sr-no-table" aria-label="Sr-numbers">
+            <thead>
+              <tr>
+                <th id="srno">
+                  <h6 class="invisible mb-0">sr no.</h6>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let srNo of indexArray" class="table-index">
+                <td>{{ srNo }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex w-100 justify-content-between" #tableWrapper>
+          <ng-container *ngFor="let header of tableHeaders; let i = index">
+            <div class="d-flex table-wrapper" *ngIf="i % 2 === 0">
+              <table
+                class="seat-table position-relative"
+                aria-label="even-seat-table"
+              >
+                <thead class="text-center">
+                  <tr class="border-bottom">
+                    <th id="table-headers">{{ tableHeaders[i] }}</th>
+                  </tr>
+                </thead>
+                <tbody #tableBody1 id="tableBody1">
+                  <ng-container
+                    *ngFor="
+                      let data of seats | filterBookseat : tableHeaders[i]
+                    "
+                  >
+                    <tr>
+                      <td
+                        *ngIf="data.column.name == tableHeaders[i]"
+                        class="employee-seat-table-thead"
+                      >
+                        <ng-container *ngIf="data.status == 'Booked'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="showPopover ? bookedPopContent : ''"
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.status == 'Reserved'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="
+                                showPopover ? reservedPopContent : ''
+                              "
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.status == 'Available'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="
+                                showPopover ? availableSeatPopContent : ''
+                              "
+                              #popoverTrigger="ngbPopover"
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.status == 'Unavailable'">
+                          <div class="custom-unavailable-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="showPopover ? unavailableSeat : ''"
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.status == 'Unassigned'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="
+                                showPopover ? unasignedSeatPopContent : ''
+                              "
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.seat.id == 'tempSeat'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                            ></button>
+                          </div>
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <table
+                class="seat-table position-relative"
+                aria-label="odd-seat-table"
+              >
+                <thead class="text-center">
+                  <tr class="border-bottom">
+                    <th id="table-headers">{{ tableHeaders[i + 1] }}</th>
+                  </tr>
+                </thead>
+                <tbody #tableBody1 id="tableBody1">
+                  <ng-container
+                    *ngFor="
+                      let data of seats | filterBookseat : tableHeaders[i + 1]
+                    "
+                  >
+                    <tr>
+                      <td
+                        *ngIf="data.column.name == tableHeaders[i + 1]"
+                        class="employee-seat-table-thead"
+                      >
+                        <ng-container *ngIf="data.status == 'Booked'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="showPopover ? bookedPopContent : ''"
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.status == 'Reserved'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="
+                                showPopover ? reservedPopContent : ''
+                              "
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.status == 'Available'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="
+                                showPopover ? availableSeatPopContent : ''
+                              "
+                              #popoverTrigger="ngbPopover"
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.status == 'Unavailable'">
+                          <div class="custom-unavailable-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="showPopover ? unavailableSeat : ''"
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.status == 'Unassigned'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.status }}"
+                              id="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                              (click)="getSeatId(data)"
+                              [ngbPopover]="
+                                showPopover ? unasignedSeatPopContent : ''
+                              "
+                            ></button>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="data.seat.id == 'tempSeat'">
+                          <div class="custom-user-popover">
+                            <button
+                              class="border-0 receivedSeat"
+                              class="{{ data.seat.id }}"
+                              name="{{ data.seatType }}"
+                            ></button>
+                          </div>
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <!-- ends: list of seats -->
+    </section>
+  </div>
+</div>
+<!-- ends:book-seat main content -->
+
+<!-- start : Popover message for reserved-seat -->
+<ng-template #reservedPopContent>
+  <ul class="popover-message p-4">
+    <li class="popover-list">
+      <div class="row">
+        <h6 class="user-details user-title col-3 ps-0">Name</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-6 pe-0">{{ emplyeeData.name }}</h6>
+        <div
+          class="reserved-seat col-2 d-flex align-items-center justify-content-center text-center px-0"
+        >
+          <span class="user-seat-reserved">Reserved</span>
+        </div>
+      </div>
+    </li>
+
+    <li class="popover-list">
+      <div class="row">
+        <h6 class="user-details user-title col-3 ps-0">Designation</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-8">{{ emplyeeData.designation }}</h6>
+      </div>
+    </li>
+    <li class="popover-list">
+      <div class="row py-1">
+        <h6 class="user-details user-title col-3 ps-0">Duration</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-8">{{ emplyeeData.duration }}</h6>
+      </div>
+    </li>
+    <li class="popover-list">
+      <div class="row">
+        <h6 class="user-details user-title col-3 ps-0">Email</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details user-email col-8">{{ emplyeeData.email }}</h6>
+      </div>
+    </li>
+  </ul>
+</ng-template>
+<!-- end : Popover message for reserved-seat -->
+
+<!-- start : Popover message for booked-seat -->
+<ng-template #bookedPopContent>
+  <ul class="popover-message book-seat-details p-4">
+    <li class="popover-list">
+      <div class="row">
+        <h6 class="user-details user-title col-3 ps-0">Name</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-8">{{ emplyeeData.name }}</h6>
+      </div>
+    </li>
+
+    <li class="popover-list">
+      <div class="row">
+        <h6 class="user-details user-title col-3 ps-0">Designation</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-8">{{ emplyeeData.designation }}</h6>
+      </div>
+    </li>
+    <li class="popover-list">
+      <div class="row py-1">
+        <h6 class="user-details user-title col-3 ps-0">Duration</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-8">{{ emplyeeData.duration }}</h6>
+      </div>
+    </li>
+    <li class="popover-list">
+      <div class="row">
+        <h6 class="user-details user-title col-3 ps-0">Email</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details user-email col-8">
+          {{ emplyeeData.email }}
+        </h6>
+      </div>
+    </li>
+  </ul>
+  <div class="p-2">
+    <ul class="popover-message booked-popover p-4">
+      <li class="popover-list">
+        <div class="row">
+          <h6 class="user-details user-title col-3 ps-0">Assigned to</h6>
+          <span class="col-1">:</span>
+          <h6 class="user-details col-6">
+            {{ emplyeeData.temporarySeatOwnerDto.name }}
+          </h6>
+          <div
+            class="booked-seat text-center col-2 d-flex align-items-center justify-content-center"
+          >
+            <span class="user-seat-booked">Booked</span>
+          </div>
+        </div>
+      </li>
+      <li class="popover-list">
+        <div class="row">
+          <h6 class="user-details user-title col-3 ps-0">Designation</h6>
+          <span class="col-1">:</span>
+          <h6 class="user-details col-8">
+            {{ emplyeeData.temporarySeatOwnerDto.designation }}
+          </h6>
+        </div>
+      </li>
+      <li class="popover-list">
+        <div class="row py-1">
+          <h6 class="user-details user-title col-3 ps-0">Duration</h6>
+          <span class="col-1">:</span>
+          <h6 class="user-details col-8">
+            {{ emplyeeData.temporarySeatOwnerDto.duration }}
+          </h6>
+        </div>
+      </li>
+      <li class="popover-list">
+        <div class="row">
+          <h6 class="user-details user-title col-3 ps-0">Email</h6>
+          <span class="col-1">:</span>
+          <h6 class="user-details user-email col-8">
+            {{ emplyeeData.temporarySeatOwnerDto.email }}
+          </h6>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+<!-- end : Popover message for booked-seat -->
+
+<!-- start : Popover message for available-seat -->
+<ng-template #availableSeatPopContent>
+  <ul class="popover-message p-0 m-0 py-3 p-4">
+    <li class="popover-list">
+      <div class="row">
+        <h6 class="user-details user-title col-3 ps-0">Name</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-6">{{ emplyeeData.name }}</h6>
+        <div
+          class="available-seat text-center col-2 d-flex align-items-center justify-content-center"
+        >
+          <span class="user-seat-available">Available</span>
+        </div>
+      </div>
+    </li>
+    <li class="popover-list">
+      <div class="row py-1">
+        <h6 class="user-details user-title col-3 ps-0">Designation</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-8">{{ emplyeeData.designation }}</h6>
+      </div>
+    </li>
+    <li class="popover-list">
+      <div class="row py-1">
+        <h6 class="user-details user-title col-3 ps-0">Duration</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-8">{{ emplyeeData.duration }}</h6>
+      </div>
+    </li>
+    <li class="popover-list">
+      <div class="row py-1">
+        <h6 class="user-details user-title col-3 ps-0">Email</h6>
+        <span class="col-1">:</span>
+        <h6 class="user-details col-8">{{ emplyeeData.email }}</h6>
+      </div>
+    </li>
+  </ul>
+  <div
+    class="w-100 d-flex flex-column justify-content-center align-items-center px-5"
+  >
+    <p class="note-available-seat text-center mt-2">
+      You have selected available seat. Please proceed with clicking on Request.
+    </p>
+  </div>
+  <div class="p-3 d-flex flex-column">
+    <h4 class="label-title mb-2 text-bold fs-5">Reason</h4>
+    <textarea
+      class="form-control text-size"
+      type="text"
+      rows="2"
+      cols="40"
+      [formControl]="reasonControl"
+      placeholder="Type reason for seat book"
+      (mousedown)="stopEventPropagation($event)"
+      (keyup)="showErrorMessage()"
+      [maxlength]="200"
+    ></textarea>
+    <span *ngIf="reasonEntered" class="text-danger pt-2"
+      >Please Enter reason</span
+    >
+    <button
+      type="button"
+      class="unasign-btn btn btn-primary mt-3 submit-reason"
+      (click)="closePopover()"
+      [disabled]="disableSubmitBtn"
+    >
+      REQUEST
+    </button>
+  </div>
+</ng-template>
+
+<!-- end : Popover message for available-seat -->
+
+<!-- start : Popover message for unasigned-seat -->
+<ng-template #unasignedSeatPopContent let-modal>
+  <div
+    class="w-100 d-flex flex-column justify-content-center align-items-center p-4"
+  >
+    <p class="note-available-seat text-center mb-2">
+      You have selected unassigned seat. please proceed with clicking on
+      Request.
+    </p>
+    <div class="p-3 d-flex flex-column">
+      <h4 class="label-title mb-2 text-bold fs-5">Reason</h4>
+      <textarea
+        class="form-control text-size"
+        type="text"
+        rows="2"
+        cols="40"
+        [formControl]="reasonControl"
+        placeholder="Type reason for seat book"
+        (mousedown)="stopEventPropagation($event)"
+        (keyup)="showErrorMessage()"
+        [maxlength]="200"
+      ></textarea>
+      <span *ngIf="reasonEntered" class="text-danger pt-2"
+        >Please Enter reason</span
+      >
+      <button
+        type="button"
+        class="unasign-btn btn btn-primary mt-3 submit-reason"
+        (click)="closePopover()"
+        [disabled]="disableSubmitBtn"
+      >
+        REQUEST
+      </button>
+    </div>
+  </div>
+</ng-template>
+<!-- end : Popover message for unasigned-seat -->
+
+<!-- start : Popup message for seat booking request -->
+<ng-template #submitContent let-modal>
+  <div class="modal-header popup-container">
+    <button
+      type="button"
+      class="btn-close cross-btn"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <img src="assets/images/close-icon.png" alt="cross-icon" />
+    </button>
+  </div>
+  <div class="d-flex justify-content-center">
+    <p class="popup-message text-center">
+      Your Seat Request is been Submitted. Thank you!&hellip;
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary sub-btn"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+<!-- end : Popup message for seat booking request -->
+<ng-template #unavailableSeat>
+  <h3 style="font-size: 16px; padding: 8px" class="text-center">
+    This seat is temporarily unavailable and cannot be booked.
+  </h3>
+</ng-template>

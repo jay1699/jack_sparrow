@@ -1,0 +1,89 @@
+.popup-container {
+  .cross-btn {
+    background-color: transparent;
+    border: 0;
+  }
+
+  .popup-heading {
+    font-size: 22px;
+    font-weight: 600;
+  }
+}
+
+.sub-btn {
+  color: $white;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.label-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.text-size {
+  resize: none;
+}
+
+//take action popup
+.popup-takeaction {
+  padding: 30px;
+}
+
+.takeaction-heading {
+  font-size: $h5-font-size;
+  font-weight: 700;
+}
+
+.user-detail-box {
+  font-weight: $headings-font-weight;
+  margin-bottom: 0;
+}
+
+.user-list {
+  color: rgba(3, 24, 55, 0.5);
+}
+
+.custom {
+  .modal-content {
+    width: 800px;
+  }
+}
+
+// Admin popup model
+.seatFullMessage {
+  font-size: $font-size-base;
+  color: $text-primary;
+  font-weight: $body-font-weight;
+}
+
+.seat-config-modal-size {
+  .modal-dialog {
+    max-width: 350px;
+  }
+
+  .modal-header {
+    padding: 0px;
+    margin: 10px 10px 0px 0px;
+  }
+}
+
+.model-message {
+  padding: 20px;
+}
+
+.status-popoup {
+}
+
+.confirmation-popup {
+  .modal-content {
+    width: 370px;
+  }
+}
+// starts : booking-history employee modal mesaage
+.cancel-confirmation-message {
+  font-weight: $font-weight-600;
+}
+// ends : booking-history employee modal mesaage

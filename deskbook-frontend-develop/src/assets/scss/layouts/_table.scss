@@ -1,0 +1,46 @@
+.table-container {
+  border-radius: 6px;
+  border: 1px solid $border-muted;
+
+  .table-content {
+    width: 100%;
+    background-color: $white;
+    border-spacing: 0;
+    border-collapse: collapse;
+    tr {
+      border-bottom: 1px solid $border-muted;
+    }
+  }
+}
+
+.content-table-data {
+  font-family: $font-family-base;
+  font-weight: $list-font-weight; //500
+  font-size: $font-size-table-head; //14px
+  color: $text-gray-400; //color
+  .email {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  td {
+    padding: 20px;
+  }
+}
+
+.admin-history {
+  .content-title {
+    color: $text-primary; //#031837
+  }
+  .content-table-head {
+    font-family: $font-family-base;
+    font-size: $font-size-table-head; //14px
+    font-weight: $headings-font-weight; //700
+    position: sticky;
+    top: 0;
+    background-color: $white;
+    th {
+      padding: 20px;
+    }
+  }
+}

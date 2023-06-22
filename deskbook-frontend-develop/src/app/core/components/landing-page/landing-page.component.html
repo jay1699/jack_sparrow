@@ -1,0 +1,27 @@
+<section class="landing-page container-fluid d-flex flex-column align-items-center h-100">
+  <div class="d-flex h-100 justify-content-center flex-column">
+    <img class="landing-page-image" src="assets/images/landing-page-image.png" alt="" />
+
+    <p class="pt-4 pb-2 text-center landing-page-info">
+      Take control of your work environment and maximize your output with easy
+      workspace reservations.
+    </p>
+    <button class="btn btn-primary btn-bookseat" type="button" (click)="isUserUpdated(userIsUpdated)">
+      BOOK YOUR SEAT NOW
+    </button>
+  </div>
+</section>
+<ng-template #userIsUpdated let-modal>
+  <div class="modal-body">
+    <p class="mb-0 text-center">To access deskbook feature,Please update your profile</p>
+  </div>
+  <div class="modal-footer p-1">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Close click')" (click)="userProfile()">
+      Ok
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+      Cancel
+    </button>
+  </div>
+</ng-template>
+<router-outlet></router-outlet>

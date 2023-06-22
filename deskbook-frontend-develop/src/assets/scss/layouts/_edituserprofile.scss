@@ -1,0 +1,56 @@
+.profile-header {
+  .profile-header-title {
+    color: $text-primary;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-md;
+    padding: 21px;
+  }
+}
+.userdetails {
+  .fullname {
+    color: $text-primary;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-md;
+  }
+  .useremail {
+    color: $text-muted;
+    font-weight: $font-weight-600;
+    font-size: $font-size-sm;
+  }
+  .btn-editprofile {
+    height: 30px;
+    width: 108px;
+    background-color: $light-blue-color;
+    color: $white;
+    border-radius: 2px;
+    font-weight: $font-weight-600;
+    font-size: 11px;
+  }
+  .wrapper {
+    padding-left: 30px;
+    padding-right: 43px;
+    .icon-img {
+      height: 40px;
+      width: 40px;
+    }
+    .info-title {
+      color: $text-gray-400;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-600;
+    }
+    .user-info-label {
+      color: $text-muted;
+      font-weight: 450;
+      font-size: $font-size-xs;
+    }
+    .user-info-value {
+      color: $text-primary;
+      font-weight: 420;
+      font-size: $font-size-xs;
+    }
+  }
+}
+.first-row,
+.third-row {
+  margin-bottom: 50px;
+}

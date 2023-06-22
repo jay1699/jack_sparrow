@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>Internal Server Error</value>
+  </data>
+  <data name="RegistrationSuccessful" xml:space="preserve">
+    <value>User Registration Successful</value>
+  </data>
+  <data name="BadRequest" xml:space="preserve">
+    <value>Bad Request</value>
+  </data>
+  <data name="EmailExist" xml:space="preserve">
+    <value>Email Id already Exists.</value>
+  </data>
+  <data name="RegistrattionFailed" xml:space="preserve">
+    <value>Use Registration failed</value>
+  </data>
+  <data name="MinCharacter" xml:space="preserve">
+    <value>Minimum three character required.</value>
+  </data>
+  <data name="EmployeeIdNotFound" xml:space="preserve">
+    <value>Employee Id Not Found.</value>
+  </data>
+  <data name="SavedSuccessfully" xml:space="preserve">
+    <value>The Changes Have been Successfully Saved.</value>
+  </data>
+  <data name="RequestIdnotFound" xml:space="preserve">
+    <value>SeatRequestId not Found</value>
+  </data>
+  <data name="SuccessfulChanges" xml:space="preserve">
+    <value>Changes have been Successful</value>
+  </data>
+  <data name="NoDataFound" xml:space="preserve">
+    <value>No Data Found</value>
+  </data>
+  <data name="MaximumLimit" xml:space="preserve">
+    <value>Maximum limit to add seat on one Table is 15 and capacity of one floor is 150 seats.</value>
+  </data>
+  <data name="ConsecutiveOrder" xml:space="preserve">
+    <value>Your SeatNumber is not in ConsecutiveOrder</value>
+  </data>
+  <data name="SeatAdded" xml:space="preserve">
+    <value>Seat Added Successfully</value>
+  </data>
+  <data name="StatusNotChanged" xml:space="preserve">
+    <value>Seat Status Not Changed</value>
+  </data>
+  <data name="UnassignStatus" xml:space="preserve">
+    <value>Seat status has been changed to Unassign.</value>
+  </data>
+  <data name="UnavailableStatus" xml:space="preserve">
+    <value>Seat status has been changed to Unavailable</value>
+  </data>
+   <data name="ErrorOccured" xml:space="preserve">
+    <value>Error Occured while Saving Changes</value>
+  </data>
+</root>

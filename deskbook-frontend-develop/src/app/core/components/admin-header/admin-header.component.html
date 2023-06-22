@@ -1,0 +1,19 @@
+<section class="db-heading d-flex justify-content-between align-items-center position-md-absolute p-3">
+  <label for="toggle" title="Toggle">
+    <figure class="humburger-toggle-switch d-flex align-items-center mb-0">
+      <img src="assets/images/humburger.png" class="img-fluid" alt="humburger" />
+    </figure>
+  </label>
+  <div class="d-flex">
+    <button class="btn-icon" title="Notification">
+      <span class="fa-regular fa-bell"></span>
+    </button>
+    <button class="btn-icon mx-3" (click)="userProfile()" title="User Profile">
+      <span class="fa-sharp fa-regular fa-circle-user"></span>
+    </button>
+    <!-- use button for logout -->
+    <button type="button" class="btn btn-logout" (click)="logout()">
+      Logout
+    </button>
+  </div>
+</section>
